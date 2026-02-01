@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4338CA"/>
+      <stop offset="50%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded background -->
+  <rect width="1024" height="1024" rx="224" fill="url(#bg)"/>
+
+  <!-- V-shaped download arrow -->
+  <path d="M280,300 L512,680 L744,300"
+        fill="none" stroke="white" stroke-width="88"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Download base line -->
+  <line x1="280" y1="800" x2="744" y2="800"
+        stroke="white" stroke-width="88" stroke-linecap="round"/>
+</svg>

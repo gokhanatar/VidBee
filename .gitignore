@@ -5,5 +5,15 @@ out
 .wxt
 .output
 .DS_Store
+Thumbs.db
 .eslintcache
 *.log*
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Capacitor native projects
+ios/
+android/

@@ -1,5 +1,5 @@
-/* VidBee Download Button Container */
-.vidbee-download-container {
+/* VidDownloadPro Download Button Container */
+.viddownloadpro-download-container {
   position: fixed;
   bottom: 16px;
   right: 16px;
@@ -9,14 +9,14 @@
 }
 
 /* Hidden state */
-.vidbee-download-container.vidbee-hidden {
+.viddownloadpro-download-container.viddownloadpro-hidden {
   opacity: 0;
   pointer-events: none;
   transform: scale(0);
 }
 
 /* Main Download Button */
-.vidbee-download-button {
+.viddownloadpro-download-button {
   position: relative;
   display: flex;
   align-items: center;
@@ -38,7 +38,7 @@
   overflow: visible;
 }
 
-.vidbee-download-button:hover {
+.viddownloadpro-download-button:hover {
   opacity: 1;
   background: rgba(0, 0, 0, 0.7);
   border-color: rgba(255, 255, 255, 0.2);
@@ -46,11 +46,11 @@
   transform: scale(1.1);
 }
 
-.vidbee-download-button:active {
+.viddownloadpro-download-button:active {
   transform: scale(0.95);
 }
 
-.vidbee-download-button svg {
+.viddownloadpro-download-button svg {
   flex-shrink: 0;
   stroke: currentColor;
   width: 16px;
@@ -58,7 +58,7 @@
 }
 
 /* Tooltip */
-.vidbee-tooltip {
+.viddownloadpro-tooltip {
   position: absolute;
   right: calc(100% + 8px);
   top: 50%;
@@ -81,7 +81,7 @@
   line-height: 1;
 }
 
-.vidbee-tooltip::after {
+.viddownloadpro-tooltip::after {
   content: '';
   position: absolute;
   left: 100%;
@@ -91,13 +91,13 @@
   border-left-color: rgba(0, 0, 0, 0.9);
 }
 
-.vidbee-download-button:hover .vidbee-tooltip {
+.viddownloadpro-download-button:hover .viddownloadpro-tooltip {
   opacity: 1;
   transform: translateY(-50%) translateX(0);
 }
 
 /* Close Button - Hidden by default */
-.vidbee-close-button {
+.viddownloadpro-close-button {
   position: absolute;
   top: -6px;
   right: -6px;
@@ -124,22 +124,22 @@
 }
 
 /* Show close button on container hover */
-.vidbee-download-container:hover .vidbee-close-button {
+.viddownloadpro-download-container:hover .viddownloadpro-close-button {
   opacity: 1;
   pointer-events: auto;
 }
 
-.vidbee-close-button:hover {
+.viddownloadpro-close-button:hover {
   background: rgba(255, 77, 77, 1);
   transform: scale(1.15);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
 }
 
-.vidbee-close-button:active {
+.viddownloadpro-close-button:active {
   transform: scale(0.9);
 }
 
-.vidbee-close-button svg {
+.viddownloadpro-close-button svg {
   flex-shrink: 0;
   stroke: currentColor;
   width: 10px;
@@ -147,14 +147,14 @@
 }
 
 /* Close button tooltip positioning */
-.vidbee-close-button .vidbee-tooltip {
+.viddownloadpro-close-button .viddownloadpro-tooltip {
   right: calc(100% + 6px);
   top: 50%;
   left: auto;
   transform: translateY(-50%) translateX(4px);
 }
 
-.vidbee-close-button .vidbee-tooltip::after {
+.viddownloadpro-close-button .viddownloadpro-tooltip::after {
   left: 100%;
   top: 50%;
   right: auto;
@@ -163,7 +163,7 @@
   border-top-color: transparent;
 }
 
-.vidbee-download-container:hover .vidbee-close-button:hover .vidbee-tooltip {
+.viddownloadpro-download-container:hover .viddownloadpro-close-button:hover .viddownloadpro-tooltip {
   opacity: 1;
   transform: translateY(-50%) translateX(0);
 }

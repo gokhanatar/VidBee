@@ -7,8 +7,8 @@ export default defineConfig({
     monkey({
       entry: 'src/main.ts',
       userscript: {
-        icon: 'https://vidbee.org/favicon.svg',
-        namespace: 'vidbee',
+        icon: 'https://viddownloadpro.org/favicon.svg',
+        namespace: 'viddownloadpro',
         match: [
           // YouTube
           'https://www.youtube.com/*',

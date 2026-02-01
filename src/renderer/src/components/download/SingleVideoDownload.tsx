@@ -13,11 +13,12 @@ import {
 import { Separator } from '@renderer/components/ui/separator'
 import { cn } from '@renderer/lib/utils'
 import type { OneClickQualityPreset, VideoFormat, VideoInfo } from '@shared/types'
-import { useAtom } from 'jotai'
-import { AlertCircle, ExternalLink, Loader2, Settings2 } from 'lucide-react'
+import { useAtom, useAtomValue } from 'jotai'
+import { AlertCircle, Crown, ExternalLink, Loader2, Settings2 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCachedThumbnail } from '../../hooks/use-cached-thumbnail'
+import { FREE_MAX_HEIGHT, premiumAtom } from '../../store/premium'
 import { settingsAtom } from '../../store/settings'
 import { DOWNLOAD_FEEDBACK_ISSUE_TITLE, FeedbackLinkButtons } from '../feedback/FeedbackLinks'
 
@@ -107,6 +108,7 @@ interface FormatListProps {
 const FormatList = ({ formats, type, codec, selectedFormat, onFormatChange }: FormatListProps) => {
   const { t } = useTranslation()
   const [settings] = useAtom(settingsAtom)
+  const premium = useAtomValue(premiumAtom)
   const [videoFormats, setVideoFormats] = useState<VideoFormat[]>([])
   const [audioFormats, setAudioFormats] = useState<VideoFormat[]>([])
 
@@ -357,6 +359,10 @@ const FormatList = ({ formats, type, codec, selectedFormat, onFormatChange }: Fo
   return (
     <RadioGroup value={selectedFormat} onValueChange={onFormatChange} className="w-full gap-1">
       {list.map((format) => {
+        const isLocked =
+          !premium.isPremium &&
+          type === 'video' &&
+          (format.height ?? 0) > FREE_MAX_HEIGHT
         const qualityLabel =
           type === 'video' ? formatVideoQuality(format) : formatAudioQuality(format)
         const detailLabel = type === 'video' ? formatVideoDetail(format) : formatAudioDetail(format)
@@ -375,21 +381,24 @@ const FormatList = ({ formats, type, codec, selectedFormat, onFormatChange }: Fo
         return (
           <label
             key={format.format_id}
-            htmlFor={`${type}-${format.format_id}`}
+            htmlFor={isLocked ? undefined : `${type}-${format.format_id}`}
             className={cn(
-              'relative flex items-center gap-3 px-3 py-2 cursor-pointer transition-colors rounded-md',
-              isSelected ? 'bg-primary/10' : 'hover:bg-muted'
+              'relative flex items-center gap-3 px-3 py-2 transition-colors rounded-md',
+              isLocked ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
+              !isLocked && isSelected ? 'bg-primary/10' : !isLocked && 'hover:bg-muted'
             )}
+            onClick={isLocked ? (e) => e.preventDefault() : undefined}
           >
             <RadioGroupItem
               value={format.format_id}
               id={`${type}-${format.format_id}`}
               className="shrink-0 hidden"
+              disabled={isLocked}
             />
 
             <div className="flex-1 min-w-0 flex items-center gap-4">
               <span
-                className={cn('text-sm font-medium w-16 shrink-0', isSelected && 'text-primary')}
+                className={cn('text-sm font-medium w-16 shrink-0', !isLocked && isSelected && 'text-primary')}
               >
                 {qualityLabel}
               </span>
@@ -413,6 +422,9 @@ const FormatList = ({ formats, type, codec, selectedFormat, onFormatChange }: Fo
               <span className="text-xs text-muted-foreground tabular-nums shrink-0 w-20 text-right">
                 {sizeLabel}
               </span>
+              {isLocked && (
+                <Crown className="h-4 w-4 shrink-0 text-amber-500" />
+              )}
             </div>
           </label>
         )

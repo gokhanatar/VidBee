@@ -148,10 +148,10 @@ export function createWindow(): void {
     frame: false,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false,
+      sandbox: true,
       contextIsolation: true,
       nodeIntegration: false,
-      webSecurity: false // Allow drag regions to work
+      webSecurity: true
     }
   }
 
@@ -184,7 +184,10 @@ export function createWindow(): void {
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
-    shell.openExternal(details.url)
+    const { protocol } = new URL(details.url)
+    if (protocol === 'https:' || protocol === 'http:') {
+      shell.openExternal(details.url)
+    }
     return { action: 'deny' }
   })
 
@@ -282,7 +285,7 @@ function isWithinBase(targetPath: string, basePath: string): boolean {
   return !relativePath.startsWith('..') && !isAbsolute(relativePath)
 }
 
-function resolveVidbeeFilePath(requestUrl: URL, userDataPath: string): string | null {
+function resolveProtocolFilePath(requestUrl: URL, userDataPath: string): string | null {
   const sanitizedPath = sanitizeRequestPath(requestUrl)
   const [rootSegment, ...restSegments] = sanitizedPath.split('/')
   const rendererPath = restSegments.join('/') || 'index.html'
@@ -310,12 +313,12 @@ function resolveVidbeeFilePath(requestUrl: URL, userDataPath: string): string | 
   return null
 }
 
-function registerVidbeeProtocol(): void {
+function registerAppProtocol(): void {
   try {
     const userDataPath = app.getPath('userData')
     protocol.registerFileProtocol(APP_PROTOCOL, (request, callback) => {
       const requestUrl = new URL(request.url)
-      const filePath = resolveVidbeeFilePath(requestUrl, userDataPath)
+      const filePath = resolveProtocolFilePath(requestUrl, userDataPath)
 
       if (!filePath) {
         log.error(`File not found for ${request.url}`)
@@ -414,9 +417,9 @@ app.on('open-url', (event, url) => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(async () => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId('com.vidbee')
+  electronApp.setAppUserModelId('com.viddownloadpro')
 
-  registerVidbeeProtocol()
+  registerAppProtocol()
 
   const registered = app.setAsDefaultProtocolClient(APP_PROTOCOL)
   if (!registered) {

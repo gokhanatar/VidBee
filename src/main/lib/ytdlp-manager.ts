@@ -122,9 +122,16 @@ class YtDlpManager {
     )
   }
 
+  private static readonly ALLOWED_JS_RUNTIMES = new Set(['deno', 'node', 'bun'])
+
   private resolveJsRuntimeArgs(): string[] {
     const runtime = (process.env.YTDLP_JS_RUNTIME || 'deno').trim()
     if (!runtime || runtime === 'none') {
+      return []
+    }
+
+    if (!YtdlpManager.ALLOWED_JS_RUNTIMES.has(runtime)) {
+      scopedLoggers.engine.warn(`Invalid JS runtime "${runtime}". Allowed: ${[...YtdlpManager.ALLOWED_JS_RUNTIMES].join(', ')}`)
       return []
     }
 

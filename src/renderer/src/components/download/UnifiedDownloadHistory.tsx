@@ -10,6 +10,7 @@ import {
   DialogTitle
 } from '@renderer/components/ui/dialog'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@renderer/components/ui/tabs'
+import { logger } from '@renderer/lib/logger'
 import { cn } from '@renderer/lib/utils'
 import { useAtomValue, useSetAtom } from 'jotai'
 import { History as HistoryIcon, LayoutDashboard } from 'lucide-react'
@@ -389,7 +390,7 @@ export function UnifiedDownloadHistory({
       }
     }
     if (failedIds.length > 0) {
-      console.warn('Failed to delete some playlist files:', failedIds)
+      logger.warn('Failed to delete some playlist files:', failedIds)
     }
   }
 
@@ -425,11 +426,11 @@ export function UnifiedDownloadHistory({
       setAlsoDeleteFiles(false)
     } catch (error) {
       if (confirmAction.type === 'delete-selected') {
-        console.error('Failed to remove selected history items:', error)
+        logger.error('Failed to remove selected history items:', error)
         toast.error(t('notifications.itemsRemoveFailed'))
       }
       if (confirmAction.type === 'delete-playlist') {
-        console.error('Failed to remove playlist history:', error)
+        logger.error('Failed to remove playlist history:', error)
         toast.error(t('notifications.playlistHistoryRemoveFailed'))
       }
     } finally {
@@ -604,8 +605,8 @@ export function UnifiedDownloadHistory({
                       <span>{filter.label}</span>
                       <span
                         className={cn(
-                          'ml-1 min-w-5 rounded-full px-1 text-xs font-medium text-neutral-900',
-                          isActive ? ' bg-neutral-100' : ' bg-neutral-200'
+                          'ml-1 min-w-5 rounded-full px-1 text-xs font-medium text-foreground',
+                          isActive ? ' bg-muted' : ' bg-muted/60'
                         )}
                       >
                         {filter.count}
@@ -630,7 +631,7 @@ export function UnifiedDownloadHistory({
                     try {
                       await ipcServices.fs.openPath(settings.downloadPath)
                     } catch (error) {
-                      console.error('Failed to open download folder:', error)
+                      logger.error('Failed to open download folder:', error)
                       toast.error(t('dashboard.quickActions.folderOpenError'))
                     }
                   }}

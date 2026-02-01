@@ -21,14 +21,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@renderer/components/u
 import { Tooltip, TooltipContent, TooltipTrigger } from '@renderer/components/ui/tooltip'
 import { type LanguageCode, languageList, normalizeLanguageCode } from '@shared/languages'
 import type { OneClickQualityPreset } from '@shared/types'
-import { useAtom, useSetAtom } from 'jotai'
-import { AlertTriangle, CheckCircle2 } from 'lucide-react'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { AlertTriangle, CheckCircle2, Crown, Loader2 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { ipcServices } from '../lib/ipc'
 import { logger } from '../lib/logger'
+import { premiumAtom } from '../store/premium'
 import { loadSettingsAtom, saveSettingAtom, settingsAtom } from '../store/settings'
 
 const normalizeProfileInput = (value: string) => value.trim().replace(/^['"]|['"]$/g, '')
@@ -64,8 +65,10 @@ export function Settings() {
   const [settings, _setSettings] = useAtom(settingsAtom)
   const loadSettings = useSetAtom(loadSettingsAtom)
   const saveSetting = useSetAtom(saveSettingAtom)
+  const premium = useAtomValue(premiumAtom)
   const [platform, setPlatform] = useState<string>('')
   const [activeTab, setActiveTab] = useState<string>('general')
+  const [isLoading, setIsLoading] = useState(true)
   const [browserProfileValidation, setBrowserProfileValidation] = useState<{
     valid: boolean
     reason?: string
@@ -73,25 +76,20 @@ export function Settings() {
   const lastAutoDetectBrowser = useRef<string | null>(null)
 
   useEffect(() => {
-    try {
-      loadSettings()
-    } catch (error) {
-      logger.error('[Settings] Failed to load settings:', error)
-    }
-  }, [loadSettings])
-
-  useEffect(() => {
-    const fetchPlatform = async () => {
+    const init = async () => {
       try {
-        const platformInfo = await ipcServices.app.getPlatform()
-        setPlatform(platformInfo)
+        await Promise.all([
+          loadSettings(),
+          ipcServices.app.getPlatform().then(setPlatform)
+        ])
       } catch (error) {
-        logger.error('Failed to get platform info:', error)
+        logger.error('[Settings] Failed to initialize:', error)
+      } finally {
+        setIsLoading(false)
       }
     }
-
-    fetchPlatform()
-  }, [])
+    init()
+  }, [loadSettings])
 
   const autoLaunchSupported = platform === 'darwin' || platform === 'win32'
 
@@ -101,7 +99,7 @@ export function Settings() {
         await saveSetting({ key, value })
       } catch (error) {
         logger.error('[Settings] Failed to change setting', { key, value, error })
-        toast.error(t('settings.saveError') || 'Failed to save setting')
+        toast.error(t('settings.saveError'))
       }
     },
     [saveSetting, t]
@@ -269,6 +267,14 @@ export function Settings() {
     await i18nInstance.changeLanguage(value)
   }
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+      </div>
+    )
+  }
+
   return (
     <div className="h-full bg-background">
       <div className="container mx-auto max-w-4xl p-6 space-y-6">
@@ -296,7 +302,7 @@ export function Settings() {
                   <ItemDescription>{t('settings.downloadPathDescription')}</ItemDescription>
                 </ItemContent>
                 <ItemActions>
-                  <div className="flex gap-2 w-full max-w-md">
+                  <div className="flex flex-wrap gap-2 w-full">
                     <Input value={settings.downloadPath} readOnly className="flex-1" />
                     <Button onClick={handleSelectPath}>{t('settings.selectPath')}</Button>
                   </div>
@@ -585,12 +591,20 @@ export function Settings() {
 
               <Item variant="muted">
                 <ItemContent>
-                  <ItemTitle>{t('settings.shareWatermark')}</ItemTitle>
-                  <ItemDescription>{t('settings.shareWatermarkDescription')}</ItemDescription>
+                  <ItemTitle className="flex items-center gap-1.5">
+                    {t('settings.shareWatermark')}
+                    {!premium.isPremium && <Crown className="h-3.5 w-3.5 text-amber-500" />}
+                  </ItemTitle>
+                  <ItemDescription>
+                    {premium.isPremium
+                      ? t('settings.shareWatermarkDescription')
+                      : t('premium.watermarkFreeDescription')}
+                  </ItemDescription>
                 </ItemContent>
                 <ItemActions>
                   <Switch
-                    checked={settings.shareWatermark ?? false}
+                    checked={premium.isPremium ? (settings.shareWatermark ?? false) : true}
+                    disabled={!premium.isPremium}
                     onCheckedChange={(value) => {
                       try {
                         handleSettingChange('shareWatermark', value)
@@ -648,7 +662,7 @@ export function Settings() {
                         '[Settings] Error rendering max concurrent downloads select:',
                         error
                       )
-                      return <div>Error loading max concurrent downloads setting</div>
+                      return <div>{t('settings.settingLoadError')}</div>
                     }
                   })()}
                 </ItemActions>
@@ -676,12 +690,12 @@ export function Settings() {
                               logger.error('[Settings] Error changing proxy:', error)
                             }
                           }}
-                          className="w-64"
+                          className="w-full max-w-64"
                         />
                       )
                     } catch (error) {
                       logger.error('[Settings] Error rendering proxy input:', error)
-                      return <div>Error loading proxy setting</div>
+                      return <div>{t('settings.settingLoadError')}</div>
                     }
                   })()}
                 </ItemActions>
@@ -749,7 +763,7 @@ export function Settings() {
                       )
                     } catch (error) {
                       logger.error('[Settings] Error rendering browser for cookies select:', error)
-                      return <div>Error loading browser for cookies setting</div>
+                      return <div>{t('settings.settingLoadError')}</div>
                     }
                   })()}
                 </ItemActions>
@@ -815,7 +829,7 @@ export function Settings() {
                         '[Settings] Error rendering browser cookies profile input:',
                         error
                       )
-                      return <div>Error loading browser cookies profile setting</div>
+                      return <div>{t('settings.settingLoadError')}</div>
                     }
                   })()}
                 </ItemActions>
@@ -833,7 +847,7 @@ export function Settings() {
                     try {
                       const cookiesPathValue = settings.cookiesPath ?? ''
                       return (
-                        <div className="flex gap-2 w-full max-w-md">
+                        <div className="flex flex-wrap gap-2 w-full">
                           <Input value={cookiesPathValue} readOnly className="flex-1" />
                           <Button onClick={handleSelectCookiesFile}>
                             {t('settings.selectPath')}
@@ -855,7 +869,7 @@ export function Settings() {
                       )
                     } catch (error) {
                       logger.error('[Settings] Error rendering cookies file input:', error)
-                      return <div>Error loading cookies file setting</div>
+                      return <div>{t('settings.settingLoadError')}</div>
                     }
                   })()}
                 </ItemActions>
@@ -890,7 +904,7 @@ export function Settings() {
                     try {
                       const configPathValue = settings.configPath ?? ''
                       return (
-                        <div className="flex gap-2 w-full max-w-md">
+                        <div className="flex flex-wrap gap-2 w-full">
                           <Input value={configPathValue} readOnly className="flex-1" />
                           <Button onClick={handleSelectConfigFile}>
                             {t('settings.selectPath')}
@@ -912,7 +926,7 @@ export function Settings() {
                       )
                     } catch (error) {
                       logger.error('[Settings] Error rendering config file input:', error)
-                      return <div>Error loading config file setting</div>
+                      return <div>{t('settings.settingLoadError')}</div>
                     }
                   })()}
                 </ItemActions>
@@ -943,7 +957,7 @@ export function Settings() {
                       )
                     } catch (error) {
                       logger.error('[Settings] Error rendering enable analytics switch:', error)
-                      return <div>Error loading enable analytics setting</div>
+                      return <div>{t('settings.settingLoadError')}</div>
                     }
                   })()}
                 </ItemActions>

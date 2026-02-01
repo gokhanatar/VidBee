@@ -5,6 +5,7 @@ import type {
 } from '@shared/types'
 import { atom } from 'jotai'
 import { ipcServices } from '../lib/ipc'
+import { logger } from '../lib/logger'
 
 const normalizeCommaList = (value?: string): string[] => {
   if (!value) {
@@ -27,7 +28,7 @@ export const loadSubscriptionsAtom = atom(null, async (_get, set) => {
     const subscriptions = await ipcServices.subscriptions.list()
     set(subscriptionsAtom, subscriptions)
   } catch (error) {
-    console.error('Failed to load subscriptions:', error)
+    logger.error('Failed to load subscriptions:', error)
   }
 })
 

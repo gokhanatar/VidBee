@@ -1,12 +1,12 @@
-appId: com.vidbee
-productName: VidBee
+appId: com.viddownloadpro
+productName: VidDownloadPro
 directories:
   buildResources: build
 afterPack: build/after-pack.cjs
 protocols:
-  - name: VidBee
+  - name: VidDownloadPro
     schemes:
-      - vidbee
+      - viddownloadpro
 files:
   - '!**/.vscode/*'
   - '!**/.context/**'
@@ -22,7 +22,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: vidbee
+  executableName: viddownloadpro
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
@@ -54,7 +54,7 @@ appImage:
 npmRebuild: false
 publish:
   provider: generic
-  url: https://github.com/nexmoe/vidbee/releases/latest/download
+  url: https://github.com/nexmoe/viddownloadpro/releases/latest/download
 electronDownload:
   mirror: https://npmmirror.com/mirrors/electron/
 electronLanguages:

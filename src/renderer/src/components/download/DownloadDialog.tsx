@@ -1,3 +1,4 @@
+import { logger } from '@renderer/lib/logger'
 import { Button } from '@renderer/components/ui/button'
 import { Checkbox } from '@renderer/components/ui/checkbox'
 import { Dialog, DialogContent, DialogFooter, DialogHeader } from '@renderer/components/ui/dialog'
@@ -10,13 +11,20 @@ import {
   buildAudioFormatPreference,
   buildVideoFormatPreference
 } from '@shared/utils/format-preferences'
-import { useAtom, useSetAtom } from 'jotai'
-import { FolderOpen, List, Loader2, Plus, Video } from 'lucide-react'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { Crown, FolderOpen, List, Loader2, Plus, Video } from 'lucide-react'
 import { useCallback, useEffect, useId, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { ipcEvents, ipcServices } from '../../lib/ipc'
 import { addDownloadAtom, updateDownloadAtom } from '../../store/downloads'
+import {
+  canDownloadAtom,
+  incrementDailyCountAtom,
+  loadDailyCountAtom,
+  premiumAtom,
+  remainingDownloadsAtom
+} from '../../store/premium'
 import { loadSettingsAtom, settingsAtom } from '../../store/settings'
 import {
   currentVideoInfoAtom,
@@ -111,6 +119,11 @@ export function DownloadDialog({
   const loadSettings = useSetAtom(loadSettingsAtom)
   const updateDownload = useSetAtom(updateDownloadAtom)
   const addDownload = useSetAtom(addDownloadAtom)
+  const premium = useAtomValue(premiumAtom)
+  const canDownload = useAtomValue(canDownloadAtom)
+  const remainingDownloads = useAtomValue(remainingDownloadsAtom)
+  const incrementDailyCount = useSetAtom(incrementDailyCountAtom)
+  const loadDailyCount = useSetAtom(loadDailyCountAtom)
 
   const [url, setUrl] = useState('')
   const [activeTab, setActiveTab] = useState<'single' | 'playlist'>('single')
@@ -224,7 +237,7 @@ export function DownloadDialog({
             }
             toast.success(t('playlist.foundVideos', { count: info.entryCount }))
           } catch (error) {
-            console.error('Failed to fetch playlist info:', error)
+            logger.error('Failed to fetch playlist info:', error)
             const message =
               error instanceof Error && error.message ? error.message : t('playlist.previewFailed')
             setPlaylistPreviewError(message)
@@ -336,7 +349,7 @@ export function DownloadDialog({
 
           toast.success(t('download.videoInfoUpdated'))
         } catch (infoError) {
-          console.warn('Failed to fetch video info for one-click download:', infoError)
+          logger.warn('Failed to fetch video info for one-click download:', infoError)
           updateDownload({
             id,
             changes: {
@@ -358,7 +371,7 @@ export function DownloadDialog({
           setUrl('')
         }
       } catch (error) {
-        console.error('Failed to start one-click download:', error)
+        logger.error('Failed to start one-click download:', error)
         toast.error(t('notifications.downloadFailed'))
       }
     },
@@ -424,7 +437,7 @@ export function DownloadDialog({
         }
         toast.success(t('playlist.foundVideos', { count: info.entryCount }))
       } catch (error) {
-        console.error('Failed to fetch playlist info:', error)
+        logger.error('Failed to fetch playlist info:', error)
         const message =
           error instanceof Error && error.message ? error.message : t('playlist.previewFailed')
         setPlaylistPreviewError(message)
@@ -460,6 +473,10 @@ export function DownloadDialog({
     t,
     url
   ])
+
+  useEffect(() => {
+    loadDailyCount()
+  }, [loadDailyCount])
 
   const handleOpenDialog = useCallback(async () => {
     if (settings.oneClickDownload) {
@@ -539,7 +556,7 @@ export function DownloadDialog({
         setPlaylistCustomDownloadPath(path)
       }
     } catch (error) {
-      console.error('Failed to select directory:', error)
+      logger.error('Failed to select directory:', error)
       toast.error(t('settings.directorySelectError'))
     }
   }, [playlistBusy, t])
@@ -562,7 +579,7 @@ export function DownloadDialog({
       }
       toast.success(t('playlist.foundVideos', { count: info.entryCount }))
     } catch (error) {
-      console.error('Failed to fetch playlist info:', error)
+      logger.error('Failed to fetch playlist info:', error)
       const message =
         error instanceof Error && error.message ? error.message : t('playlist.previewFailed')
       setPlaylistPreviewError(message)
@@ -667,7 +684,7 @@ export function DownloadDialog({
 
       setOpen(false) // Close dialog after download starts
     } catch (error) {
-      console.error('Failed to start playlist download:', error)
+      logger.error('Failed to start playlist download:', error)
       toast.error(t('playlist.downloadFailed'))
     } finally {
       setPlaylistDownloadLoading(false)
@@ -749,7 +766,7 @@ export function DownloadDialog({
 
       setOpen(false) // Close dialog after download starts
     } catch (error) {
-      console.error('Failed to start download:', error)
+      logger.error('Failed to start download:', error)
       toast.error(t('notifications.downloadFailed'))
     }
   }, [videoInfo, singleVideoState, addDownload, t])
@@ -836,6 +853,13 @@ export function DownloadDialog({
 
           {/* Playlist Download Tab */}
           <TabsContent value="playlist" className="flex flex-col flex-1 min-h-0 mt-0">
+            {!premium.isPremium ? (
+              <div className="flex flex-col items-center justify-center gap-3 py-12 text-center">
+                <Crown className="h-10 w-10 text-amber-500" />
+                <p className="text-sm font-medium">{t('premium.playlistProOnly')}</p>
+                <p className="text-xs text-muted-foreground max-w-[280px]">{t('premium.playlistProDescription')}</p>
+              </div>
+            ) : (
             <PlaylistDownload
               playlistPreviewLoading={playlistPreviewLoading}
               playlistPreviewError={playlistPreviewError}
@@ -853,6 +877,7 @@ export function DownloadDialog({
               setEndIndex={setEndIndex}
               setDownloadType={setDownloadType}
             />
+            )}
           </TabsContent>
         </Tabs>
         <DialogFooter className="shrink-0 pt-3 border-t">
@@ -880,7 +905,7 @@ export function DownloadDialog({
                               }))
                             }
                           } catch (error) {
-                            console.error('Failed to select directory:', error)
+                            logger.error('Failed to select directory:', error)
                             toast.error(t('settings.directorySelectError'))
                           }
                         }}
@@ -963,6 +988,11 @@ export function DownloadDialog({
                 </div>
               )}
             </div>
+            {!premium.isPremium && (
+              <span className="text-xs text-muted-foreground">
+                {t('premium.remainingDownloads', { count: remainingDownloads })}
+              </span>
+            )}
             <div className="ml-auto flex gap-2">
               {activeTab === 'single' ? (
                 !videoInfo && !loading ? (
@@ -976,7 +1006,14 @@ export function DownloadDialog({
                   </Button>
                 ) : !loading && videoInfo ? (
                   <Button
-                    onClick={handleSingleVideoDownload}
+                    onClick={() => {
+                      if (!canDownload) {
+                        toast.error(t('premium.dailyLimitReached'))
+                        return
+                      }
+                      incrementDailyCount()
+                      handleSingleVideoDownload()
+                    }}
                     disabled={loading || !selectedSingleFormat}
                   >
                     {singleVideoState.activeTab === 'video'

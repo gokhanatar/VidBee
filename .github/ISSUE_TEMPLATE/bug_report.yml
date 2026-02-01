@@ -8,7 +8,7 @@ body:
     id: app_version
     attributes:
       label: App version
-      description: The VidBee version (e.g., 1.2.3)
+      description: The VidDownloadPro version (e.g., 1.2.3)
       placeholder: 1.2.3
     validations:
       required: true

@@ -6,7 +6,7 @@ import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export function DownloadChart() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const allRecords = useAtomValue(downloadsArrayAtom)
 
   const chartData = useMemo(() => {
@@ -26,7 +26,7 @@ export function DownloadChart() {
       const failed = dayRecords.filter((r) => r.status === 'error').length
 
       const date = new Date(dayStart)
-      const label = date.toLocaleDateString('en-US', { weekday: 'short' })
+      const label = date.toLocaleDateString(i18n.language, { weekday: 'short' })
 
       data.push({
         label,
@@ -37,9 +37,10 @@ export function DownloadChart() {
     }
 
     return data
-  }, [allRecords])
+  }, [allRecords, i18n.language])
 
   const maxValue = Math.max(...chartData.map((d) => d.value), 1)
+  const totalDownloads = chartData.reduce((sum, d) => sum + d.value, 0)
 
   return (
     <Card>
@@ -48,6 +49,11 @@ export function DownloadChart() {
         <CardDescription>{t('dashboard.chart.description')}</CardDescription>
       </CardHeader>
       <CardContent>
+        {totalDownloads === 0 ? (
+          <div className="flex items-center justify-center h-48 text-sm text-muted-foreground">
+            {t('dashboard.chart.noData')}
+          </div>
+        ) : (
         <div className="space-y-4">
           <div className="flex items-end justify-between gap-2 h-48">
             {chartData.map((day, index) => {
@@ -72,7 +78,7 @@ export function DownloadChart() {
                         height: `${heightPercentage}%`,
                         minHeight: day.value > 0 ? '8px' : '4px'
                       }}
-                      title={`${day.label}: ${day.value} downloads\nCompleted: ${day.completed}\nFailed: ${day.failed}`}
+                      title={`${day.label}: ${day.value} ${t('dashboard.chart.downloads')}\n${t('dashboard.chart.completed')}: ${day.completed}\n${t('dashboard.chart.failed')}: ${day.failed}`}
                     >
                       {day.value > 0 && (
                         <div className="absolute inset-0 flex flex-col-reverse">
@@ -118,6 +124,7 @@ export function DownloadChart() {
             </div>
           </div>
         </div>
+        )}
       </CardContent>
     </Card>
   )

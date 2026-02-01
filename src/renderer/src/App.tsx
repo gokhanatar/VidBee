@@ -1,3 +1,4 @@
+import { logger } from '@renderer/lib/logger'
 import { Sidebar } from '@renderer/components/ui/sidebar'
 import { Toaster } from '@renderer/components/ui/sonner'
 import { TitleBar } from '@renderer/components/ui/title-bar'
@@ -6,18 +7,58 @@ import { useAtom, useSetAtom } from 'jotai'
 import { ThemeProvider } from 'next-themes'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { HashRouter, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router'
+import { AlertTriangle, Home as HomeIcon } from 'lucide-react'
+import { HashRouter, Route, Routes, useLocation, useNavigate } from 'react-router'
 import { toast } from 'sonner'
+import { BillingIssueBanner } from './components/BillingIssueBanner'
 import { ErrorBoundary } from './components/error/ErrorBoundary'
 import { useDownloadEvents } from './hooks/use-download-events'
 import { ipcEvents, ipcServices } from './lib/ipc'
+import { isCapacitor } from './lib/platform'
 import { About } from './pages/About'
 import { Home } from './pages/Home'
+import { Paywall } from './pages/Paywall'
 import { Settings } from './pages/Settings'
 import { Subscriptions } from './pages/Subscriptions'
 import { loadSettingsAtom, settingsAtom } from './store/settings'
 import { loadSubscriptionsAtom, setSubscriptionsAtom } from './store/subscriptions'
 import { updateAvailableAtom, updateReadyAtom } from './store/update'
+
+function PageErrorFallback({ onGoHome }: { onGoHome: () => void }) {
+  const { t } = useTranslation()
+  return (
+    <div className="flex flex-col items-center justify-center h-full gap-4 p-8">
+      <AlertTriangle className="h-12 w-12 text-destructive" />
+      <p className="text-sm text-muted-foreground">{t('error.pageError')}</p>
+      <button
+        type="button"
+        onClick={onGoHome}
+        className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:bg-primary/90"
+      >
+        <HomeIcon className="h-4 w-4" />
+        {t('error.goHome')}
+      </button>
+    </div>
+  )
+}
+
+function NotFoundPage({ onGoHome }: { onGoHome: () => void }) {
+  const { t } = useTranslation()
+  return (
+    <div className="flex flex-col items-center justify-center h-full gap-4 p-8">
+      <p className="text-4xl font-bold text-muted-foreground">404</p>
+      <p className="text-sm text-muted-foreground">{t('error.notFound')}</p>
+      <button
+        type="button"
+        onClick={onGoHome}
+        className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:bg-primary/90"
+      >
+        <HomeIcon className="h-4 w-4" />
+        {t('error.goHome')}
+      </button>
+    </div>
+  )
+}
 
 type Page = 'home' | 'subscriptions' | 'settings' | 'about'
 
@@ -61,7 +102,7 @@ function AppContent() {
   const navigate = useNavigate()
   const location = useLocation()
   const currentPage = pathToPage(location.pathname)
-  const supportedSitesUrl = 'https://vidbee.org/supported-sites/'
+  const supportedSitesUrl = 'https://viddownloadpro.org/supported-sites/'
 
   useDownloadEvents()
 
@@ -81,6 +122,11 @@ function AppContent() {
 
   useEffect(() => {
     loadSettings()
+    if (isCapacitor()) {
+      import('./lib/capacitor-bootstrap').then(({ bootstrapCapacitor }) => bootstrapCapacitor())
+      import('./lib/firebase').then(({ initFirebase }) => initFirebase())
+      import('./services/revenuecat').then(({ initRevenueCat }) => initRevenueCat())
+    }
   }, [loadSettings])
 
   useEffect(() => {
@@ -161,7 +207,7 @@ function AppContent() {
         const platformInfo = await ipcServices.app.getPlatform()
         setPlatform(platformInfo)
       } catch (error) {
-        console.error('Failed to get platform info:', error)
+        logger.error('Failed to get platform info:', error)
         // Default to showing title bar if platform detection fails
         setPlatform('unknown')
       }
@@ -225,7 +271,7 @@ function AppContent() {
     const handleDownloadProgress = (rawProgress: unknown) => {
       const progress = (rawProgress ?? {}) as { percent?: number }
       if (typeof progress?.percent === 'number') {
-        console.info('Update download progress:', progress.percent.toFixed(2))
+        logger.info('Update download progress:', progress.percent.toFixed(2))
       }
     }
 
@@ -257,22 +303,42 @@ function AppContent() {
       <main className="flex flex-col flex-1 min-h-0 overflow-hidden bg-background">
         {/* Custom Title Bar */}
         <TitleBar platform={platform} />
+        <BillingIssueBanner />
 
-        <div className="flex-1 h-full overflow-y-auto overflow-x-hidden">
+        <div key={location.pathname} className="flex-1 h-full overflow-y-auto overflow-x-hidden animate-in fade-in duration-200">
           <Routes>
             <Route
               path="/"
               element={
-                <Home
-                  onOpenSupportedSites={handleOpenSupportedSites}
-                  onOpenSettings={() => handlePageChange('settings')}
-                />
+                <ErrorBoundary fallback={() => <PageErrorFallback onGoHome={() => handlePageChange('home')} />}>
+                  <Home
+                    onOpenSupportedSites={handleOpenSupportedSites}
+                    onOpenSettings={() => handlePageChange('settings')}
+                  />
+                </ErrorBoundary>
               }
             />
-            <Route path="/subscriptions" element={<Subscriptions />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/about" element={<About />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/subscriptions" element={
+              <ErrorBoundary fallback={() => <PageErrorFallback onGoHome={() => handlePageChange('home')} />}>
+                <Subscriptions />
+              </ErrorBoundary>
+            } />
+            <Route path="/settings" element={
+              <ErrorBoundary fallback={() => <PageErrorFallback onGoHome={() => handlePageChange('home')} />}>
+                <Settings />
+              </ErrorBoundary>
+            } />
+            <Route path="/about" element={
+              <ErrorBoundary fallback={() => <PageErrorFallback onGoHome={() => handlePageChange('home')} />}>
+                <About />
+              </ErrorBoundary>
+            } />
+            <Route path="/paywall" element={
+              <ErrorBoundary fallback={() => <PageErrorFallback onGoHome={() => handlePageChange('home')} />}>
+                <Paywall />
+              </ErrorBoundary>
+            } />
+            <Route path="*" element={<NotFoundPage onGoHome={() => handlePageChange('home')} />} />
           </Routes>
         </div>
       </main>

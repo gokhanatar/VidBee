@@ -1,6 +1,6 @@
-# Contributing to VidBee
+# Contributing to VidDownloadPro
 
-Thank you for taking the time to improve VidBee. These notes keep the project maintainable and easy to review.
+Thank you for taking the time to improve VidDownloadPro. These notes keep the project maintainable and easy to review.
 
 ## Getting Ready
 - Use Node.js 18+ and pnpm 8+.
@@ -75,4 +75,4 @@ src/
 - Mention any user facing updates or migrations.
 - Confirm that `pnpm run check` passes and note any follow-up work that is out of scope.
 
-We appreciate every contribution that keeps VidBee simple and reliable.
+We appreciate every contribution that keeps VidDownloadPro simple and reliable.

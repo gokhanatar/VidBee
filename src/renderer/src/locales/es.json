@@ -10,17 +10,17 @@
       "view": "Ver",
       "visit": "Visitar"
     },
-    "appName": "VidBee",
+    "appName": "VidDownloadPro",
     "autoUpdateDescription": "Descargar e instalar nuevas versiones automáticamente en segundo plano.",
     "autoUpdateTitle": "Actualizaciones automáticas",
     "betaProgramDescription": "Recibe compilaciones tempranas y próximas funciones antes que nadie.",
     "betaProgramTitle": "Canal de vista previa",
-    "description": "VidBee es un descargador gratuito y de código abierto construido con Electron y potenciado por yt-dlp.",
+    "description": "VidDownloadPro es un descargador gratuito y de código abierto construido con Electron y potenciado por yt-dlp.",
     "followAuthorActions": {
       "follow": "Seguir a @nexmoex"
     },
-    "followAuthorDescription": "Mantente actualizado con las últimas noticias y actualizaciones de VidBee.",
-    "followAuthorSupport": "Sigue al desarrollador en X (Twitter) para obtener las últimas actualizaciones y noticias sobre VidBee.",
+    "followAuthorDescription": "Mantente actualizado con las últimas noticias y actualizaciones de VidDownloadPro.",
+    "followAuthorSupport": "Sigue al desarrollador en X (Twitter) para obtener las últimas actualizaciones y noticias sobre VidDownloadPro.",
     "followAuthorTitle": "Seguir al Desarrollador",
     "here": "aquí",
     "homepage": "Página de inicio",
@@ -61,15 +61,15 @@
       "website": "Sitio web oficial",
       "websiteDescription": "Destacados del producto, hoja de ruta y noticias de la comunidad."
     },
-    "resourcesDescription": "Enlaces útiles para aprender más sobre VidBee y mantenerte conectado.",
+    "resourcesDescription": "Enlaces útiles para aprender más sobre VidDownloadPro y mantenerte conectado.",
     "resourcesTitle": "Recursos",
     "shareActions": {
       "copy": "Copiar enlace",
       "facebook": "Compartir en Facebook",
       "twitter": "Compartir en X (Twitter)"
     },
-    "shareDescription": "Comparte VidBee con tu comunidad con un clic.",
-    "shareSupport": "Recomienda VidBee a tus amigos para apoyar nuestro crecimiento y actualizaciones.",
+    "shareDescription": "Comparte VidDownloadPro con tu comunidad con un clic.",
+    "shareSupport": "Recomienda VidDownloadPro a tus amigos para apoyar nuestro crecimiento y actualizaciones.",
     "shareTitle": "Difunde la palabra",
     "sourceCode": "El código fuente está disponible",
     "title": "Acerca de",
@@ -102,7 +102,7 @@
   },
   "app": {
     "description": "Descarga videos y audios de cientos de sitios",
-    "title": "VidBee"
+    "title": "VidDownloadPro"
   },
   "download": {
     "active": "Activo",
@@ -228,7 +228,9 @@
     "componentStack": "Pila de componentes",
     "noStackTrace": "No hay rastro de pila disponible",
     "fullReport": "Informe de error completo",
-    "helpText": "Si este error persiste, copia el informe de error anterior y compártelo con el equipo de soporte. Puedes encontrar la información de contacto en la página Acerca de."
+    "helpText": "Si este error persiste, copia el informe de error anterior y compártelo con el equipo de soporte. Puedes encontrar la información de contacto en la página Acerca de.",
+    "pageError": "Error en la página",
+    "notFound": "Página no encontrada"
   },
   "errors": {
     "clickToCopy": "Haz clic para copiar los detalles",
@@ -423,11 +425,11 @@
     "languageDescription": "Elige tu idioma preferido para la interfaz de la aplicación",
     "light": "Claro",
     "hideDockIcon": "Ocultar icono del Dock",
-    "hideDockIconDescription": "Eliminar VidBee del Dock de macOS. Usa la barra de menú o el icono de la bandeja para volver a abrir la aplicación.",
+    "hideDockIconDescription": "Eliminar VidDownloadPro del Dock de macOS. Usa la barra de menú o el icono de la bandeja para volver a abrir la aplicación.",
     "launchAtLogin": "Iniciar al arrancar",
-    "launchAtLoginDescription": "Abrir VidBee automáticamente después de iniciar sesión en tu computadora.",
+    "launchAtLoginDescription": "Abrir VidDownloadPro automáticamente después de iniciar sesión en tu computadora.",
     "launchAtLoginUnsupported": "El inicio automático solo está disponible en macOS y Windows.",
-    "enableAnalytics": "Ayuda a mejorar VidBee",
+    "enableAnalytics": "Ayuda a mejorar VidDownloadPro",
     "enableAnalyticsDescription": "Comparte datos de uso anónimos para ayudarnos a entender cómo se usa la aplicación y priorizar mejoras.",
     "embedChapters": "Incrustar capítulos",
     "embedChaptersDescription": "Agregar marcadores de capítulos al archivo cuando estén disponibles",
@@ -438,7 +440,7 @@
     "embedThumbnail": "Incrustar miniatura",
     "embedThumbnailDescription": "Agregar la miniatura como portada",
     "shareWatermark": "Marca de agua para compartir",
-    "shareWatermarkDescription": "Agrega una marca de agua con el título original, el autor y la marca VidBee",
+    "shareWatermarkDescription": "Agrega una marca de agua con el título original, el autor y la marca VidDownloadPro",
     "maxConcurrentDownloads": "Número máximo de descargas activas",
     "maxConcurrentDownloadsDescription": "Número máximo de descargas simultáneas",
     "none": "Ninguno",
@@ -468,13 +470,15 @@
     },
     "system": "Sistema",
     "theme": "Tema",
-    "themeDescription": "Elige un tema claro, oscuro o del sistema para VidBee",
+    "themeDescription": "Elige un tema claro, oscuro o del sistema para VidDownloadPro",
     "title": "Configuración",
     "tray": {
       "quit": "Salir",
       "showHome": "Mostrar Inicio"
     },
-    "video": "Preferencias de Video"
+    "video": "Preferencias de Video",
+    "settingLoadError": "Error al cargar la configuración",
+    "saveError": "Error al guardar la configuración"
   },
   "subscriptions": {
     "title": "Suscripciones",
@@ -482,15 +486,15 @@
     "description": "Monitorea automáticamente los feeds RSS y encola nuevas descargas sin trabajo manual.",
     "defaults": {
       "title": "Valores predeterminados de automatización",
-      "description": "Controla dónde se almacenan las descargas de suscripciones y con qué frecuencia VidBee verifica nuevos videos.",
+      "description": "Controla dónde se almacenan las descargas de suscripciones y con qué frecuencia VidDownloadPro verifica nuevos videos.",
       "downloadDirectory": "Directorio de descarga",
       "filenameTemplate": "Plantilla de nombre de archivo (solo archivo)",
       "onlyLatest": "Descargar solo el último video",
-      "onlyLatestDescription": "Cuando está habilitado, VidBee omite elementos antiguos del backlog y solo toma la última carga."
+      "onlyLatestDescription": "Cuando está habilitado, VidDownloadPro omite elementos antiguos del backlog y solo toma la última carga."
     },
     "add": {
       "title": "Agregar RSS",
-      "description": "Pega un enlace de feed RSS. VidBee detectará el feed automáticamente."
+      "description": "Pega un enlace de feed RSS. VidDownloadPro detectará el feed automáticamente."
     },
     "fields": {
       "url": "URL del Feed",
@@ -581,7 +585,7 @@
     },
     "rssHub": {
       "title": "Suscripciones Automatizadas con RSSHub",
-      "description": "Combina VidBee con RSSHub para habilitar suscripciones y descargas automatizadas de varias plataformas. Una vez configurado, VidBee se ejecuta en segundo plano y descarga automáticamente los últimos videos y contenido.",
+      "description": "Combina VidDownloadPro con RSSHub para habilitar suscripciones y descargas automatizadas de varias plataformas. Una vez configurado, VidDownloadPro se ejecuta en segundo plano y descarga automáticamente los últimos videos y contenido.",
       "learnMore": "Aprende más sobre RSSHub",
       "openDocs": "Abrir Documentación de RSSHub",
       "hint": "¿No tienes una URL de feed RSS? Usa RSSHub para generar feeds RSS para YouTube, Twitter y miles de otras plataformas."
@@ -592,7 +596,7 @@
     "moreDescription": "La lista completa de yt-dlp se actualiza constantemente por la comunidad.",
     "moreTitle": "¿Necesitas otro sitio?",
     "openFullList": "Abrir lista completa de sitios soportados",
-    "pageDescription": "VidBee usa yt-dlp bajo el capó para llegar a cientos de fuentes.",
+    "pageDescription": "VidDownloadPro usa yt-dlp bajo el capó para llegar a cientos de fuentes.",
     "pageIntro": "Aquí están los servicios principales de los que la gente descarga con más frecuencia.",
     "pageTitle": "Sitios Soportados",
     "popular": {
@@ -671,5 +675,36 @@
     },
     "popularSection": "Plataformas principales",
     "viewAll": "Ver todos los sitios soportados"
+  },
+  "dashboard": {
+    "chart": {
+      "downloads": "descargas"
+    }
+  },
+  "premium": {
+    "title": "Actualizar a Premium",
+    "subtitle": "Desbloquea todas las funciones y elimina los límites",
+    "features": {
+      "feature1": "Descargas diarias ilimitadas",
+      "feature2": "Todas las opciones de calidad (1080p, 4K, 8K)",
+      "feature3": "Descarga de listas de reproducción en lote",
+      "feature4": "Sin marca de agua en las descargas"
+    },
+    "subscribe": "Suscribirse",
+    "restore": "Restaurar compras",
+    "terms": "Términos de servicio",
+    "privacy": "Política de privacidad",
+    "alreadyPremium": "Eres miembro Premium",
+    "purchaseSuccess": "¡Bienvenido a Premium!",
+    "purchaseFailed": "La compra falló. Por favor, inténtalo de nuevo.",
+    "restoreSuccess": "Compras restauradas con éxito",
+    "restoreFailed": "No hay compras para restaurar",
+    "billingIssueTitle": "Problema de facturación detectado",
+    "billingIssueDescription": "Por favor, actualiza tu método de pago para continuar tu suscripción.",
+    "playlistProOnly": "La descarga de listas de reproducción es una función Pro",
+    "playlistProDescription": "Actualiza a Pro para descargar listas de reproducción completas de una vez.",
+    "dailyLimitReached": "Límite diario de descargas alcanzado. Actualiza a Pro para descargas ilimitadas.",
+    "remainingDownloads": "{{count}} descargas restantes hoy",
+    "watermarkFreeDescription": "Actualiza a Pro para eliminar la marca de agua de las descargas."
   }
 }

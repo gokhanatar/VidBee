@@ -121,7 +121,7 @@ function safeUnlink(filePath) {
 
 function getDownloadHeaders(url) {
   const headers = {
-    'User-Agent': 'vidbee-setup',
+    'User-Agent': 'viddownloadpro-setup',
     Accept: '*/*'
   }
   if (GITHUB_TOKEN && /github\.com|githubusercontent\.com/.test(url)) {
@@ -212,7 +212,7 @@ function fetchJson(url) {
   return new Promise((resolve, reject) => {
     const protocol = url.startsWith('https') ? https : http
     const headers = {
-      'User-Agent': 'vidbee-setup',
+      'User-Agent': 'viddownloadpro-setup',
       Accept: 'application/vnd.github+json'
     }
     if (GITHUB_TOKEN) {

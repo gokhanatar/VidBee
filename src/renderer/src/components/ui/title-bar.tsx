@@ -63,6 +63,7 @@ export function TitleBar({ platform }: TitleBarProps) {
           size="icon"
           className="h-8 w-8 hover:bg-muted"
           onClick={handleMinimize}
+          aria-label="Minimize"
         >
           <IconFluentSubtract20Regular className="h-4 w-4" />
         </Button>
@@ -71,6 +72,7 @@ export function TitleBar({ platform }: TitleBarProps) {
           size="icon"
           className="h-8 w-8 hover:bg-muted"
           onClick={handleMaximize}
+          aria-label={isMaximized ? 'Restore' : 'Maximize'}
         >
           {isMaximized ? (
             <IconFluentSquareMultiple20Regular className="h-4 w-4" />
@@ -83,6 +85,7 @@ export function TitleBar({ platform }: TitleBarProps) {
           size="icon"
           className="h-8 w-8 hover:bg-red-500 hover:text-white"
           onClick={handleClose}
+          aria-label="Close"
         >
           <IconFluentDismiss20Regular className="h-4 w-4" />
         </Button>

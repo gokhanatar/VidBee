@@ -10,17 +10,17 @@
       "view": "表示",
       "visit": "訪問"
     },
-    "appName": "VidBee",
+    "appName": "VidDownloadPro",
     "autoUpdateDescription": "バックグラウンドで新しいリリースを自動的にダウンロードしてインストールします。",
     "autoUpdateTitle": "自動アップデート",
     "betaProgramDescription": "他の人より先に早期ビルドと今後の機能を受け取ります。",
     "betaProgramTitle": "プレビューチャンネル",
-    "description": "VidBeeはElectronで構築され、yt-dlpによって動力を得る無料のオープンソースダウンローダーです。",
+    "description": "VidDownloadProはElectronで構築され、yt-dlpによって動力を得る無料のオープンソースダウンローダーです。",
     "followAuthorActions": {
       "follow": "@nexmoexをフォロー"
     },
-    "followAuthorDescription": "VidBeeの最新ニュースとアップデートを入手してください。",
-    "followAuthorSupport": "X (Twitter)で開発者をフォローして、VidBeeの最新アップデートとニュースを入手してください。",
+    "followAuthorDescription": "VidDownloadProの最新ニュースとアップデートを入手してください。",
+    "followAuthorSupport": "X (Twitter)で開発者をフォローして、VidDownloadProの最新アップデートとニュースを入手してください。",
     "followAuthorTitle": "開発者をフォロー",
     "here": "ここ",
     "homepage": "ホームページ",
@@ -61,15 +61,15 @@
       "website": "公式ウェブサイト",
       "websiteDescription": "製品のハイライト、ロードマップ、コミュニティニュース。"
     },
-    "resourcesDescription": "VidBeeについてもっと学び、つながりを保つための有用なリンク。",
+    "resourcesDescription": "VidDownloadProについてもっと学び、つながりを保つための有用なリンク。",
     "resourcesTitle": "リソース",
     "shareActions": {
       "copy": "リンクをコピー",
       "facebook": "Facebookで共有",
       "twitter": "X (Twitter)で共有"
     },
-    "shareDescription": "ワンクリックでコミュニティとVidBeeを共有してください。",
-    "shareSupport": "私たちの成長とアップデートをサポートするために、友達にVidBeeを推奨してください。",
+    "shareDescription": "ワンクリックでコミュニティとVidDownloadProを共有してください。",
+    "shareSupport": "私たちの成長とアップデートをサポートするために、友達にVidDownloadProを推奨してください。",
     "shareTitle": "口コミを広める",
     "sourceCode": "ソースコードが利用可能",
     "title": "について",
@@ -102,7 +102,7 @@
   },
   "app": {
     "description": "数百のサイトからビデオとオーディオをダウンロード",
-    "title": "VidBee"
+    "title": "VidDownloadPro"
   },
   "download": {
     "active": "アクティブ",
@@ -228,7 +228,9 @@
     "componentStack": "コンポーネントスタック",
     "noStackTrace": "利用可能なスタックトレースはありません",
     "fullReport": "完全なエラーレポート",
-    "helpText": "このエラーが続く場合は、上記のエラーレポートをコピーしてサポートチームに共有してください。連絡先は「概要」ページにあります。"
+    "helpText": "このエラーが続く場合は、上記のエラーレポートをコピーしてサポートチームに共有してください。連絡先は「概要」ページにあります。",
+    "pageError": "ページエラーが発生しました",
+    "notFound": "ページが見つかりません"
   },
   "errors": {
     "clickToCopy": "詳細をコピーするにはクリック",
@@ -423,11 +425,11 @@
     "languageDescription": "アプリのインターフェースに使用する言語を選択してください",
     "light": "ライト",
     "hideDockIcon": "ドックアイコンを非表示にする",
-    "hideDockIconDescription": "VidBee を macOS Dock から削除します。\nメニュー バーまたはトレイ アイコンを使用して、アプリを再度開きます。",
+    "hideDockIconDescription": "VidDownloadPro を macOS Dock から削除します。\nメニュー バーまたはトレイ アイコンを使用して、アプリを再度開きます。",
     "launchAtLogin": "起動時に起動する",
-    "launchAtLoginDescription": "コンピューターにサインインした後、VidBee を自動的に開きます。",
+    "launchAtLoginDescription": "コンピューターにサインインした後、VidDownloadPro を自動的に開きます。",
     "launchAtLoginUnsupported": "自動起動は macOS と Windows でのみ利用できます。",
-    "enableAnalytics": "VidBee の改善にご協力ください",
+    "enableAnalytics": "VidDownloadPro の改善にご協力ください",
     "enableAnalyticsDescription": "匿名の使用状況データを共有することで、アプリの使用状況を把握し、改善の優先順位を付けることができます。",
     "embedChapters": "チャプターを埋め込む",
     "embedChaptersDescription": "利用可能な場合はファイルにチャプターマーカーを追加",
@@ -438,7 +440,7 @@
     "embedThumbnail": "サムネイルを埋め込む",
     "embedThumbnailDescription": "サムネイルをカバーアートとして追加",
     "shareWatermark": "共有用ウォーターマーク",
-    "shareWatermarkDescription": "元のタイトル、作者、VidBee のブランド名を含むウォーターマークを追加します",
+    "shareWatermarkDescription": "元のタイトル、作者、VidDownloadPro のブランド名を含むウォーターマークを追加します",
     "maxConcurrentDownloads": "最大アクティブダウンロード数",
     "maxConcurrentDownloadsDescription": "最大同時ダウンロード数",
     "none": "なし",
@@ -468,13 +470,15 @@
     },
     "system": "システム",
     "theme": "テーマ",
-    "themeDescription": "VidBeeのライト、ダーク、またはシステムテーマを選択",
+    "themeDescription": "VidDownloadProのライト、ダーク、またはシステムテーマを選択",
     "title": "設定",
     "tray": {
       "quit": "終了",
       "showHome": "ホームを表示"
     },
-    "video": "ビデオ設定"
+    "video": "ビデオ設定",
+    "settingLoadError": "設定の読み込みに失敗しました",
+    "saveError": "設定の保存に失敗しました"
   },
   "subscriptions": {
     "title": "定期購入",
@@ -482,15 +486,15 @@
     "description": "RSS フィードを自動的に監視し、手動作業なしで新しいダウンロードをキューに追加します。",
     "defaults": {
       "title": "自動化のデフォルト",
-      "description": "サブスクリプションのダウンロードが保存される場所と、VidBee が新しいビデオをチェックする頻度を制御します。",
+      "description": "サブスクリプションのダウンロードが保存される場所と、VidDownloadPro が新しいビデオをチェックする頻度を制御します。",
       "downloadDirectory": "ダウンロードディレクトリ",
       "filenameTemplate": "ファイル名のテンプレート (ファイルのみ)",
       "onlyLatest": "最新のビデオのみをダウンロードする",
-      "onlyLatestDescription": "有効にすると、VidBee は古いバックログ項目をスキップし、最新のアップロードのみを取得します。"
+      "onlyLatestDescription": "有効にすると、VidDownloadPro は古いバックログ項目をスキップし、最新のアップロードのみを取得します。"
     },
     "add": {
       "title": "RSSを追加",
-      "description": "RSS フィードのリンクを貼り付けます。 \nVidBee はフィードを自動的に検出します。"
+      "description": "RSS フィードのリンクを貼り付けます。 \nVidDownloadPro はフィードを自動的に検出します。"
     },
     "fields": {
       "url": "フィード URL",
@@ -581,7 +585,7 @@
     },
     "rssHub": {
       "title": "RSSHub による自動サブスクリプション",
-      "description": "VidBee と RSSHub を組み合わせると、さまざまなプラットフォームからの自動サブスクリプションとダウンロードが可能になります。\nセットアップが完了すると、VidBee がバックグラウンドで実行され、最新のビデオとコンテンツが自動的にダウンロードされます。",
+      "description": "VidDownloadPro と RSSHub を組み合わせると、さまざまなプラットフォームからの自動サブスクリプションとダウンロードが可能になります。\nセットアップが完了すると、VidDownloadPro がバックグラウンドで実行され、最新のビデオとコンテンツが自動的にダウンロードされます。",
       "learnMore": "RSSHub について詳しく見る",
       "openDocs": "RSSHub ドキュメントを開く",
       "hint": "RSS フィード URL をお持ちでない場合は、 \nRSSHub を使用して、YouTube、Twitter、その他数千のプラットフォーム用の RSS フィードを生成します。"
@@ -592,7 +596,7 @@
     "moreDescription": "完全なyt-dlpリストはコミュニティによって継続的に更新されています。",
     "moreTitle": "他のサイトが必要ですか？",
     "openFullList": "サポートされているすべてのサイトリストを開く",
-    "pageDescription": "VidBeeは数百のソースに到達するためにyt-dlpをバックグラウンドで使用します。",
+    "pageDescription": "VidDownloadProは数百のソースに到達するためにyt-dlpをバックグラウンドで使用します。",
     "pageIntro": "人々が最も頻繁にダウンロードする主要サービスです。",
     "pageTitle": "サポートされているサイト",
     "popular": {
@@ -671,5 +675,36 @@
     },
     "popularSection": "主要プラットフォーム",
     "viewAll": "サポートされているすべてのサイトを表示"
+  },
+  "dashboard": {
+    "chart": {
+      "downloads": "ダウンロード"
+    }
+  },
+  "premium": {
+    "title": "プレミアムにアップグレード",
+    "subtitle": "すべての機能をアンロックし、制限を解除",
+    "features": {
+      "feature1": "毎日のダウンロード無制限",
+      "feature2": "すべての画質オプション（1080p、4K、8K）",
+      "feature3": "プレイリスト一括ダウンロード",
+      "feature4": "ダウンロードにウォーターマークなし"
+    },
+    "subscribe": "購読する",
+    "restore": "購入を復元",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー",
+    "alreadyPremium": "プレミアム会員です",
+    "purchaseSuccess": "プレミアムへようこそ！",
+    "purchaseFailed": "購入に失敗しました。もう一度お試しください。",
+    "restoreSuccess": "購入が正常に復元されました",
+    "restoreFailed": "復元する購入がありません",
+    "billingIssueTitle": "請求の問題が検出されました",
+    "billingIssueDescription": "サブスクリプションを継続するには、お支払い方法を更新してください。",
+    "playlistProOnly": "プレイリストのダウンロードはPro機能です",
+    "playlistProDescription": "Proにアップグレードして、プレイリスト全体を一括でダウンロードしましょう。",
+    "dailyLimitReached": "本日のダウンロード上限に達しました。Proにアップグレードして無制限にダウンロードしましょう。",
+    "remainingDownloads": "本日あと{{count}}件ダウンロード可能",
+    "watermarkFreeDescription": "Proにアップグレードして、ダウンロードからウォーターマークを削除しましょう。"
   }
 }

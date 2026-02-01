@@ -269,13 +269,13 @@ function App() {
   const clientLaunchDelayMs = 2000
 
   const openClientApp = async () => {
-    window.location.href = 'vidbee://'
+    window.location.href = 'viddownloadpro://'
     await wait(clientLaunchDelayMs)
   }
 
   const handleOpenClient = () => {
     if (!currentUrl) return
-    const deepLink = `vidbee://download?url=${encodeURIComponent(currentUrl)}`
+    const deepLink = `viddownloadpro://download?url=${encodeURIComponent(currentUrl)}`
     window.location.href = deepLink
   }
 
@@ -293,12 +293,12 @@ function App() {
   const errorTitle = isInvalidPageError
     ? 'Open a video page'
     : isClientConnectionError
-      ? 'Connect the VidBee app'
+      ? 'Connect the VidDownloadPro app'
       : 'Something went wrong'
   const errorDescription = isInvalidPageError
     ? 'Navigate to a supported video page, then try again.'
     : isClientConnectionError
-      ? 'The extension needs the VidBee desktop app to be running.'
+      ? 'The extension needs the VidDownloadPro desktop app to be running.'
       : 'Try again in a moment.'
 
   const renderStatus = () => {
@@ -330,7 +330,7 @@ function App() {
   return (
     <div className="app">
       <header>
-        <h1>VidBee</h1>
+        <h1>VidDownloadPro</h1>
         {renderStatus()}
       </header>
       {loading && (
@@ -352,7 +352,7 @@ function App() {
               <div className="action-card">
                 <p className="action-title">Client installed</p>
                 <p className="action-text">
-                  Start VidBee and keep it running, then we will retry automatically.
+                  Start VidDownloadPro and keep it running, then we will retry automatically.
                 </p>
                 <button
                   type="button"
@@ -365,15 +365,15 @@ function App() {
               <div className="action-card">
                 <p className="action-title">Need the app?</p>
                 <p className="action-text">
-                  Download VidBee once, install it, then come back here to try again.
+                  Download VidDownloadPro once, install it, then come back here to try again.
                 </p>
                 <a
-                  href="https://vidbee.app"
+                  href="https://viddownloadpro.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="secondary-button"
                 >
-                  Download VidBee
+                  Download VidDownloadPro
                 </a>
               </div>
             </div>
@@ -408,7 +408,7 @@ function App() {
           </section>
 
           <button type="button" className="primary-button" onClick={handleOpenClient}>
-            Download with VidBee
+            Download with VidDownloadPro
           </button>
 
           <section className="formats-section">

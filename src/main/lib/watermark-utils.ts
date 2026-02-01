@@ -32,7 +32,7 @@ export const normalizeWatermarkLine = (
 export const buildShareWatermarkText = (title?: string, author?: string): string => {
   const titleLine = normalizeWatermarkLine(title, 'Untitled video', WATERMARK_TITLE_MAX)
   const authorLine = normalizeWatermarkLine(`by ${author}`, 'Unknown author', WATERMARK_AUTHOR_MAX)
-  return [titleLine, authorLine, 'Downloaded with VidBee'].join(' ')
+  return [titleLine, authorLine, 'Downloaded with VidDownloadPro'].join(' ')
 }
 
 const containsCjk = (text: string): boolean =>
@@ -169,7 +169,7 @@ const resolveWatermarkOutputPaths = (inputPath: string) => {
   const base = path.basename(inputPath, path.extname(inputPath))
   const outputExt = ['mp4', 'm4v', 'mov', 'mkv'].includes(ext) ? ext : 'mp4'
   const outputPath = path.join(dir, `${base}.${outputExt}`)
-  const tempOutputPath = path.join(dir, `${base}.vidbee-watermark.${Date.now()}.${outputExt}`)
+  const tempOutputPath = path.join(dir, `${base}.vdp-watermark.${Date.now()}.${outputExt}`)
   return { outputPath, tempOutputPath, outputExt }
 }
 
@@ -199,7 +199,7 @@ const runFfmpeg = async (ffmpegPath: string, args: string[]): Promise<void> => {
 const replaceOutputFile = async (outputPath: string, tempPath: string): Promise<void> => {
   let backupPath: string | null = null
   if (fs.existsSync(outputPath)) {
-    backupPath = `${outputPath}.vidbee-backup-${Date.now()}`
+    backupPath = `${outputPath}.vdp-backup-${Date.now()}`
     await fs.promises.rename(outputPath, backupPath)
   }
 
@@ -230,7 +230,7 @@ export const applyShareWatermark = async (params: {
   const { outputPath, tempOutputPath, outputExt } = resolveWatermarkOutputPaths(inputPath)
   const textFilePath = path.join(
     os.tmpdir(),
-    `vidbee-watermark-${Date.now()}-${Math.random().toString(16).slice(2)}.txt`
+    `vdp-watermark-${Date.now()}-${Math.random().toString(16).slice(2)}.txt`
   )
   const watermarkText = buildShareWatermarkText(title, author)
   let outputReady = false

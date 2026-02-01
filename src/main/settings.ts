@@ -20,14 +20,21 @@ const ensureDirectoryExists = (dir: string) => {
 }
 
 const resolveDefaultDownloadPath = () => {
-  return path.join(os.homedir(), 'Downloads', 'VidBee')
+  return path.join(os.homedir(), 'Downloads', 'VidDownloadPro')
 }
 
 const DEFAULT_DOWNLOAD_PATH = resolveDefaultDownloadPath()
 
+interface ElectronStoreInstance<T> {
+  get<K extends keyof T>(key: K): T[K]
+  set<K extends keyof T>(key: K, value: T[K]): void
+  set(values: Partial<T>): void
+  clear(): void
+  store: T
+}
+
 class SettingsManager {
-  // biome-ignore lint/suspicious/noExplicitAny: electron-store requires dynamic import
-  private store: any
+  private store: ElectronStoreInstance<AppSettings>
 
   constructor() {
     this.store = new Store({

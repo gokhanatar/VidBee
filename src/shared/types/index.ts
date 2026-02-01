@@ -314,5 +314,5 @@ export const defaultSettings: AppSettings = {
   embedThumbnail: false,
   embedMetadata: true,
   embedChapters: true,
-  shareWatermark: false
+  shareWatermark: true
 }

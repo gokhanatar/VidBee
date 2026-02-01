@@ -1,6 +1,7 @@
 import { APP_PROTOCOL_SCHEME } from '@shared/constants'
 import { useEffect, useState } from 'react'
 import { ipcServices } from '../lib/ipc'
+import { logger } from '../lib/logger'
 
 export const useCachedThumbnail = (url?: string | null): string | undefined => {
   const [cachedUrl, setCachedUrl] = useState<string | undefined>()
@@ -28,7 +29,7 @@ export const useCachedThumbnail = (url?: string | null): string | undefined => {
         if (!isActive) return
         setCachedUrl(localUrl ?? undefined)
       } catch (error) {
-        console.error('Failed to load cached thumbnail:', error)
+        logger.error('Failed to load cached thumbnail:', error)
         if (!isActive) return
         setCachedUrl(undefined)
       }

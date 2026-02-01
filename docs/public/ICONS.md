@@ -1,11 +1,11 @@
-# VidBee Documentation Icons
+# VidDownloadPro Documentation Icons
 
-This directory contains the VidBee logo in various sizes for use in the documentation site.
+This directory contains the VidDownloadPro logo in various sizes for use in the documentation site.
 
 ## Source
 
-All icons are generated from the original VidBee application icon located at:
-`/Users/air15/Documents/GitHub/VidBee/build/icon.png`
+All icons are generated from the original VidDownloadPro application icon located at:
+`/Users/air15/Documents/GitHub/VidDownloadPro/build/icon.png`
 
 ## Available Sizes
 
@@ -31,8 +31,8 @@ All icons are generated from the original VidBee application icon located at:
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'VidBee Documentation',
-  description: 'Official VidBee documentation',
+  title: 'VidDownloadPro Documentation',
+  description: 'Official VidDownloadPro documentation',
   icons: {
     icon: [
       { url: '/icon-16.png', sizes: '16x16', type: 'image/png' },
@@ -73,7 +73,7 @@ If you need to regenerate these icons from the source:
 
 ```bash
 cd docs/public
-SOURCE="/Users/air15/Documents/GitHub/VidBee/build/icon.png"
+SOURCE="/Users/air15/Documents/GitHub/VidDownloadPro/build/icon.png"
 
 # Copy original
 cp $SOURCE icon-original.png
@@ -96,6 +96,6 @@ cp icon-32.png favicon.png
 
 ## Notes
 
-- All icons maintain the VidBee bee/honeycomb theme
+- All icons maintain the VidDownloadPro bee/honeycomb theme
 - Icons use PNG format with transparency (RGBA)
 - Generated using macOS `sips` tool for quality consistency

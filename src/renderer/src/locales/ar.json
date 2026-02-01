@@ -10,17 +10,17 @@
       "view": "عرض",
       "visit": "زيارة"
     },
-    "appName": "VidBee",
+    "appName": "VidDownloadPro",
     "autoUpdateDescription": "تنزيل وتثبيت الإصدارات الجديدة تلقائياً في الخلفية.",
     "autoUpdateTitle": "التحديثات التلقائية",
     "betaProgramDescription": "تلقي البناءات المبكرة والميزات القادمة قبل أي شخص آخر.",
     "betaProgramTitle": "قناة المعاينة",
-    "description": "VidBee هو برنامج تنزيل مجاني ومفتوح المصدر مبني باستخدام Electron ويعمل بواسطة yt-dlp.",
+    "description": "VidDownloadPro هو برنامج تنزيل مجاني ومفتوح المصدر مبني باستخدام Electron ويعمل بواسطة yt-dlp.",
     "followAuthorActions": {
       "follow": "متابعة @nexmoex"
     },
-    "followAuthorDescription": "ابق على اطلاع بآخر أخبار وتحديثات VidBee.",
-    "followAuthorSupport": "تابع المطور على X (Twitter) للحصول على آخر التحديثات والأخبار حول VidBee.",
+    "followAuthorDescription": "ابق على اطلاع بآخر أخبار وتحديثات VidDownloadPro.",
+    "followAuthorSupport": "تابع المطور على X (Twitter) للحصول على آخر التحديثات والأخبار حول VidDownloadPro.",
     "followAuthorTitle": "متابعة المطور",
     "here": "هنا",
     "homepage": "الصفحة الرئيسية",
@@ -61,15 +61,15 @@
       "website": "الموقع الرسمي",
       "websiteDescription": "أبرز المنتجات، خارطة الطريق، وأخبار المجتمع."
     },
-    "resourcesDescription": "روابط مفيدة لمعرفة المزيد عن VidBee والبقاء على اتصال.",
+    "resourcesDescription": "روابط مفيدة لمعرفة المزيد عن VidDownloadPro والبقاء على اتصال.",
     "resourcesTitle": "الموارد",
     "shareActions": {
       "copy": "نسخ الرابط",
       "facebook": "مشاركة على Facebook",
       "twitter": "مشاركة على X (Twitter)"
     },
-    "shareDescription": "شارك VidBee مع مجتمعك بنقرة واحدة.",
-    "shareSupport": "أوصِ VidBee لأصدقائك لدعم نمونا وتحديثاتنا.",
+    "shareDescription": "شارك VidDownloadPro مع مجتمعك بنقرة واحدة.",
+    "shareSupport": "أوصِ VidDownloadPro لأصدقائك لدعم نمونا وتحديثاتنا.",
     "shareTitle": "انشر الكلمة",
     "sourceCode": "الكود المصدري متاح",
     "title": "حول",
@@ -102,7 +102,7 @@
   },
   "app": {
     "description": "تحميل الفيديوهات والصوتيات من مئات المواقع",
-    "title": "VidBee"
+    "title": "VidDownloadPro"
   },
   "download": {
     "active": "نشط",
@@ -228,7 +228,9 @@
     "componentStack": "مكدس المكوّن",
     "noStackTrace": "لا يوجد تتبع مكدس متاح",
     "fullReport": "تقرير الخطأ الكامل",
-    "helpText": "إذا استمر هذا الخطأ، يرجى نسخ تقرير الخطأ أعلاه ومشاركته مع فريق الدعم. يمكنك العثور على معلومات الاتصال في صفحة \"حول\"."
+    "helpText": "إذا استمر هذا الخطأ، يرجى نسخ تقرير الخطأ أعلاه ومشاركته مع فريق الدعم. يمكنك العثور على معلومات الاتصال في صفحة \"حول\".",
+    "pageError": "حدث خطأ في الصفحة",
+    "notFound": "الصفحة غير موجودة"
   },
   "errors": {
     "clickToCopy": "انقر لنسخ التفاصيل",
@@ -423,11 +425,11 @@
     "languageDescription": "اختر لغتك المفضلة لواجهة التطبيق",
     "light": "فاتح",
     "hideDockIcon": "إخفاء أيقونة Dock",
-    "hideDockIconDescription": "إزالة VidBee من Dock في macOS. استخدم شريط القائمة أو أيقونة الدرج لإعادة فتح التطبيق.",
+    "hideDockIconDescription": "إزالة VidDownloadPro من Dock في macOS. استخدم شريط القائمة أو أيقونة الدرج لإعادة فتح التطبيق.",
     "launchAtLogin": "بدء التشغيل عند تسجيل الدخول",
-    "launchAtLoginDescription": "فتح VidBee تلقائياً بعد تسجيل الدخول إلى جهاز الكمبيوتر الخاص بك.",
+    "launchAtLoginDescription": "فتح VidDownloadPro تلقائياً بعد تسجيل الدخول إلى جهاز الكمبيوتر الخاص بك.",
     "launchAtLoginUnsupported": "البدء التلقائي متاح فقط على macOS و Windows.",
-    "enableAnalytics": "مساعدة في تحسين VidBee",
+    "enableAnalytics": "مساعدة في تحسين VidDownloadPro",
     "enableAnalyticsDescription": "مشاركة بيانات الاستخدام المجهولة لمساعدتنا في فهم كيفية استخدام التطبيق وأولويات التحسينات.",
     "embedChapters": "تضمين الفصول",
     "embedChaptersDescription": "إضافة علامات الفصول إلى الملف عند توفرها",
@@ -438,7 +440,7 @@
     "embedThumbnail": "تضمين الصورة المصغرة",
     "embedThumbnailDescription": "إضافة الصورة المصغرة كغلاف",
     "shareWatermark": "علامة مائية للمشاركة",
-    "shareWatermarkDescription": "أضف علامة مائية تتضمن العنوان الأصلي والمؤلف وعلامة VidBee التجارية",
+    "shareWatermarkDescription": "أضف علامة مائية تتضمن العنوان الأصلي والمؤلف وعلامة VidDownloadPro التجارية",
     "maxConcurrentDownloads": "العدد الأقصى للتحميلات النشطة",
     "maxConcurrentDownloadsDescription": "العدد الأقصى للتحميلات المتزامنة",
     "none": "لا شيء",
@@ -468,13 +470,15 @@
     },
     "system": "النظام",
     "theme": "المظهر",
-    "themeDescription": "اختر مظهراً فاتحاً أو داكناً أو نظامياً لـ VidBee",
+    "themeDescription": "اختر مظهراً فاتحاً أو داكناً أو نظامياً لـ VidDownloadPro",
     "title": "الإعدادات",
     "tray": {
       "quit": "إنهاء",
       "showHome": "إظهار الصفحة الرئيسية"
     },
-    "video": "تفضيلات الفيديو"
+    "video": "تفضيلات الفيديو",
+    "settingLoadError": "فشل في تحميل الإعدادات",
+    "saveError": "فشل في حفظ الإعدادات"
   },
   "subscriptions": {
     "title": "الاشتراكات",
@@ -482,15 +486,15 @@
     "description": "مراقبة تغذيات RSS تلقائياً ووضع التحميلات الجديدة في قائمة الانتظار دون عمل يدوي.",
     "defaults": {
       "title": "الإعدادات الافتراضية للأتمتة",
-      "description": "التحكم في مكان تخزين تحميلات الاشتراكات وعدد مرات فحص VidBee للفيديوهات الجديدة.",
+      "description": "التحكم في مكان تخزين تحميلات الاشتراكات وعدد مرات فحص VidDownloadPro للفيديوهات الجديدة.",
       "downloadDirectory": "مجلد التحميل",
       "filenameTemplate": "قالب اسم الملف (الملف فقط)",
       "onlyLatest": "تحميل أحدث فيديو فقط",
-      "onlyLatestDescription": "عند التفعيل، يتخطى VidBee عناصر المتراكمة القديمة ويأخذ فقط آخر تحميل."
+      "onlyLatestDescription": "عند التفعيل، يتخطى VidDownloadPro عناصر المتراكمة القديمة ويأخذ فقط آخر تحميل."
     },
     "add": {
       "title": "إضافة RSS",
-      "description": "الصق رابط تغذية RSS. سيكتشف VidBee التغذية تلقائياً."
+      "description": "الصق رابط تغذية RSS. سيكتشف VidDownloadPro التغذية تلقائياً."
     },
     "fields": {
       "url": "رابط التغذية",
@@ -581,7 +585,7 @@
     },
     "rssHub": {
       "title": "الاشتراكات الآلية مع RSSHub",
-      "description": "اجمع VidBee مع RSSHub لتمكين الاشتراكات والتحميلات الآلية من منصات مختلفة. بمجرد الإعداد، يعمل VidBee في الخلفية ويحمل تلقائياً أحدث الفيديوهات والمحتوى.",
+      "description": "اجمع VidDownloadPro مع RSSHub لتمكين الاشتراكات والتحميلات الآلية من منصات مختلفة. بمجرد الإعداد، يعمل VidDownloadPro في الخلفية ويحمل تلقائياً أحدث الفيديوهات والمحتوى.",
       "learnMore": "تعرف على المزيد حول RSSHub",
       "openDocs": "فتح وثائق RSSHub",
       "hint": "ليس لديك رابط تغذية RSS؟ استخدم RSSHub لإنشاء تغذيات RSS لـ YouTube و Twitter والآلاف من المنصات الأخرى."
@@ -592,7 +596,7 @@
     "moreDescription": "يتم تحديث قائمة yt-dlp الكاملة باستمرار من قبل المجتمع.",
     "moreTitle": "تحتاج موقعاً آخر؟",
     "openFullList": "فتح قائمة المواقع المدعومة الكاملة",
-    "pageDescription": "يستخدم VidBee yt-dlp تحت الغطاء للوصول إلى مئات المصادر.",
+    "pageDescription": "يستخدم VidDownloadPro yt-dlp تحت الغطاء للوصول إلى مئات المصادر.",
     "pageIntro": "إليك الخدمات الرئيسية التي يقوم الناس بتحميلها منها في أغلب الأحيان.",
     "pageTitle": "المواقع المدعومة",
     "popular": {
@@ -671,5 +675,36 @@
     },
     "popularSection": "المنصات الرئيسية",
     "viewAll": "عرض جميع المواقع المدعومة"
+  },
+  "dashboard": {
+    "chart": {
+      "downloads": "التحميلات"
+    }
+  },
+  "premium": {
+    "title": "الترقية إلى بريميوم",
+    "subtitle": "افتح جميع الميزات وأزل القيود",
+    "features": {
+      "feature1": "تحميلات يومية غير محدودة",
+      "feature2": "جميع خيارات الجودة (1080p، 4K، 8K)",
+      "feature3": "تحميل قوائم التشغيل دفعة واحدة",
+      "feature4": "بدون علامة مائية على التحميلات"
+    },
+    "subscribe": "اشتراك",
+    "restore": "استعادة المشتريات",
+    "terms": "شروط الخدمة",
+    "privacy": "سياسة الخصوصية",
+    "alreadyPremium": "أنت عضو بريميوم",
+    "purchaseSuccess": "مرحبًا بك في بريميوم!",
+    "purchaseFailed": "فشلت عملية الشراء. يرجى المحاولة مرة أخرى.",
+    "restoreSuccess": "تمت استعادة المشتريات بنجاح",
+    "restoreFailed": "لا توجد مشتريات لاستعادتها",
+    "billingIssueTitle": "تم اكتشاف مشكلة في الفوترة",
+    "billingIssueDescription": "يرجى تحديث طريقة الدفع لمتابعة اشتراكك.",
+    "playlistProOnly": "تحميل قوائم التشغيل ميزة للمحترفين",
+    "playlistProDescription": "قم بالترقية إلى بريميوم لتحميل قوائم التشغيل كاملة دفعة واحدة.",
+    "dailyLimitReached": "تم الوصول إلى حد التحميل اليومي. قم بالترقية إلى بريميوم للتحميل بلا حدود.",
+    "remainingDownloads": "{{count}} تحميلات متبقية اليوم",
+    "watermarkFreeDescription": "قم بالترقية إلى بريميوم لإزالة العلامة المائية من التحميلات."
   }
 }

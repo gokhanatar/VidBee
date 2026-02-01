@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2732 2732">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4338CA"/>
+      <stop offset="50%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Full background -->
+  <rect width="2732" height="2732" fill="url(#bg)"/>
+
+  <!-- Centered icon (384px size at center) -->
+  <g transform="translate(1174,1174) scale(0.375)">
+    <!-- V-shaped download arrow -->
+    <path d="M280,300 L512,680 L744,300"
+          fill="none" stroke="white" stroke-width="88"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Download base line -->
+    <line x1="280" y1="800" x2="744" y2="800"
+          stroke="white" stroke-width="88" stroke-linecap="round"/>
+  </g>
+</svg>

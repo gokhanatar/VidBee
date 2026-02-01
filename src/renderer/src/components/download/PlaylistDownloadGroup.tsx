@@ -1,3 +1,5 @@
+import { cn } from '@renderer/lib/utils'
+import { logger } from '@renderer/lib/logger'
 import { ChevronDown, ChevronRight, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -27,7 +29,7 @@ const loadExpandedState = (groupId: string): boolean => {
     const stored = localStorage.getItem(getStorageKey(groupId))
     return stored === 'true'
   } catch (error) {
-    console.error('Failed to load playlist expanded state:', error)
+    logger.error('Failed to load playlist expanded state:', error)
     return false
   }
 }
@@ -36,7 +38,7 @@ const saveExpandedState = (groupId: string, isExpanded: boolean): void => {
   try {
     localStorage.setItem(getStorageKey(groupId), String(isExpanded))
   } catch (error) {
-    console.error('Failed to save playlist expanded state:', error)
+    logger.error('Failed to save playlist expanded state:', error)
   }
 }
 
@@ -147,10 +149,10 @@ export function PlaylistDownloadGroup({
       )}
 
       <div
-        className="grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out"
-        style={{
-          gridTemplateRows: isExpanded ? '1fr' : '0fr'
-        }}
+        className={cn(
+          'grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out',
+          isExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+        )}
       >
         <div className="min-h-0">
           {records.map((record) => (

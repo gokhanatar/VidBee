@@ -436,7 +436,7 @@ class DownloadEngine extends EventEmitter {
     for (const entry of selectedEntries) {
       const downloadId = `${groupId}_${Math.random().toString(36).substring(2, 10)}`
       const customFilenameTemplate = hasDuplicateTitles
-        ? `${String(entry.index).padStart(indexWidth, '0')} - %(title)s via VidBee.%(ext)s`
+        ? `${String(entry.index).padStart(indexWidth, '0')} - %(title)s via VidDownloadPro.%(ext)s`
         : undefined
 
       const downloadOptions: DownloadOptions = {
@@ -979,15 +979,15 @@ class DownloadEngine extends EventEmitter {
 
             const withExtension = candidates.filter((entry) => entry.ext === normalizedExt)
             const titleMatches = withExtension.filter((entry) => matchesTitle(entry.file))
-            const vidbeeMatches = withExtension.filter((entry) =>
-              entry.file.toLowerCase().includes('vidbee')
+            const brandMatches = withExtension.filter((entry) =>
+              entry.file.toLowerCase().includes('viddownloadpro')
             )
             const fallbackMatches = withExtension.length > 0 ? withExtension : candidates
             const pickFrom =
               titleMatches.length > 0
                 ? titleMatches
-                : vidbeeMatches.length > 0
-                  ? vidbeeMatches
+                : brandMatches.length > 0
+                  ? brandMatches
                   : fallbackMatches
 
             if (pickFrom.length > 0) {

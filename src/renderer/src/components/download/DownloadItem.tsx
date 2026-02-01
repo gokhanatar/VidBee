@@ -2,6 +2,7 @@ import {
   DOWNLOAD_FEEDBACK_ISSUE_TITLE,
   FeedbackLinkButtons
 } from '@renderer/components/feedback/FeedbackLinks'
+import { logger } from '@renderer/lib/logger'
 import { Badge } from '@renderer/components/ui/badge'
 import { Button } from '@renderer/components/ui/button'
 import { Checkbox } from '@renderer/components/ui/checkbox'
@@ -229,7 +230,7 @@ export function DownloadItem({ download, isSelected = false, onToggleSelect }: D
         }
         setFileExists(false)
       } catch (error) {
-        console.error('Failed to check file existence:', error)
+        logger.error('Failed to check file existence:', error)
         setFileExists(false)
       }
     }
@@ -243,7 +244,7 @@ export function DownloadItem({ download, isSelected = false, onToggleSelect }: D
       await ipcServices.download.cancelDownload(download.id)
       removeDownload(download.id)
     } catch (error) {
-      console.error('Failed to cancel download:', error)
+      logger.error('Failed to cancel download:', error)
     }
   }
 
@@ -292,7 +293,7 @@ export function DownloadItem({ download, isSelected = false, onToggleSelect }: D
         subscriptionId: download.subscriptionId
       })
     } catch (error) {
-      console.error('Failed to retry download:', error)
+      logger.error('Failed to retry download:', error)
       toast.error(t('notifications.downloadFailed'))
     }
   }
@@ -315,7 +316,7 @@ export function DownloadItem({ download, isSelected = false, onToggleSelect }: D
         toast.error(t('notifications.openFolderFailed'))
       }
     } catch (error) {
-      console.error('Failed to open file location:', error)
+      logger.error('Failed to open file location:', error)
       toast.error(t('notifications.openFolderFailed'))
     }
   }
@@ -342,7 +343,7 @@ export function DownloadItem({ download, isSelected = false, onToggleSelect }: D
         toast.error(t('notifications.openFileFailed'))
       }
     } catch (error) {
-      console.error('Failed to open file:', error)
+      logger.error('Failed to open file:', error)
       toast.error(t('notifications.openFileFailed'))
     }
   }
@@ -362,7 +363,7 @@ export function DownloadItem({ download, isSelected = false, onToggleSelect }: D
       await navigator.clipboard.writeText(download.url)
       toast.success(t('notifications.urlCopied'))
     } catch (error) {
-      console.error('Failed to copy link:', error)
+      logger.error('Failed to copy link:', error)
       toast.error(t('notifications.copyFailed'))
     }
   }
@@ -401,7 +402,7 @@ export function DownloadItem({ download, isSelected = false, onToggleSelect }: D
       }
       toast.success(t('notifications.videoCopied'))
     } catch (error) {
-      console.error('Failed to copy file to clipboard:', error)
+      logger.error('Failed to copy file to clipboard:', error)
       toast.error(t('notifications.copyFailed'))
     }
   }
@@ -440,7 +441,7 @@ export function DownloadItem({ download, isSelected = false, onToggleSelect }: D
       }
       toast.success(t('notifications.itemRemoved'))
     } catch (error) {
-      console.error('Failed to delete file:', error)
+      logger.error('Failed to delete file:', error)
       toast.error(t('notifications.removeFailed'))
     }
   }
@@ -455,7 +456,7 @@ export function DownloadItem({ download, isSelected = false, onToggleSelect }: D
       }
       toast.success(t('notifications.itemRemoved'))
     } catch (error) {
-      console.error('Failed to remove record:', error)
+      logger.error('Failed to remove record:', error)
       toast.error(t('notifications.removeFailed'))
     }
   }

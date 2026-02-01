@@ -180,6 +180,11 @@ class FileSystemService extends IpcService {
   @IpcMethod()
   async openExternal(_context: IpcContext, url: string): Promise<boolean> {
     try {
+      const { protocol } = new URL(url)
+      if (protocol !== 'https:' && protocol !== 'http:') {
+        scopedLoggers.system.warn('Blocked openExternal with disallowed protocol:', protocol)
+        return false
+      }
       await shell.openExternal(url)
       return true
     } catch (error) {

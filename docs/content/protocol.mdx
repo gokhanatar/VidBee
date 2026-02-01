@@ -1,18 +1,18 @@
 ---
-title: vidbee:// Protocol
-description: Quick download using vidbee:// URL protocol
+title: viddownloadpro:// Protocol
+description: Quick download using viddownloadpro:// URL protocol
 ---
 
-VidBee registers a custom URL protocol (`vidbee://`) that allows you to trigger downloads directly from web browsers, browser extensions, or userscripts.
+VidDownloadPro registers a custom URL protocol (`viddownloadpro://`) that allows you to trigger downloads directly from web browsers, browser extensions, or userscripts.
 
 ## Basic Usage
 
-The `vidbee://` protocol can be used to open VidBee and automatically start downloading videos.
+The `viddownloadpro://` protocol can be used to open VidDownloadPro and automatically start downloading videos.
 
 ### Protocol Format
 
 ```
-vidbee://download?url=<encoded-video-url>
+viddownloadpro://download?url=<encoded-video-url>
 ```
 
 **Parameters:**
@@ -23,8 +23,8 @@ vidbee://download?url=<encoded-video-url>
 To download a YouTube video:
 
 ```html
-<a href="vidbee://download?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ">
-  Download with VidBee
+<a href="viddownloadpro://download?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ">
+  Download with VidDownloadPro
 </a>
 ```
 
@@ -32,38 +32,38 @@ Or in JavaScript:
 
 ```javascript
 const videoUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-const vidbeeUrl = `vidbee://download?url=${encodeURIComponent(videoUrl)}`
-window.location.href = vidbeeUrl
+const viddownloadproUrl = `viddownloadpro://download?url=${encodeURIComponent(videoUrl)}`
+window.location.href = viddownloadproUrl
 ```
 
-## Opening VidBee
+## Opening VidDownloadPro
 
-To simply open the VidBee app without starting a download:
+To simply open the VidDownloadPro app without starting a download:
 
 ```
-vidbee://
+viddownloadpro://
 ```
 
 ## Use Cases
 
 ### Browser Extension
 
-The VidBee browser extension uses this protocol to send the current tab's URL to the desktop app:
+The VidDownloadPro browser extension uses this protocol to send the current tab's URL to the desktop app:
 
 ```javascript
 const currentUrl = window.location.href
-const deepLink = `vidbee://download?url=${encodeURIComponent(currentUrl)}`
+const deepLink = `viddownloadpro://download?url=${encodeURIComponent(currentUrl)}`
 window.location.href = deepLink
 ```
 
 ### Userscript Integration
 
-The VidBee userscript adds quick download buttons to supported video sites:
+The VidDownloadPro userscript adds quick download buttons to supported video sites:
 
 ```javascript
 // Single click triggers download via protocol
-const vidbeeUrl = `vidbee://download?url=${encodeURIComponent(videoUrl)}`
-window.location.href = vidbeeUrl
+const viddownloadproUrl = `viddownloadpro://download?url=${encodeURIComponent(videoUrl)}`
+window.location.href = viddownloadproUrl
 ```
 
 ### Web Pages
@@ -72,19 +72,19 @@ You can add direct download links to your web pages:
 
 ```html
 <!-- Simple link -->
-<a href="vidbee://download?url=https%3A%2F%2Fexample.com%2Fvideo">
-  Download with VidBee
+<a href="viddownloadpro://download?url=https%3A%2F%2Fexample.com%2Fvideo">
+  Download with VidDownloadPro
 </a>
 
 <!-- Button with JavaScript -->
-<button onclick="openInVidBee('https://example.com/video')">
+<button onclick="openInVidDownloadPro('https://example.com/video')">
   Quick Download
 </button>
 
 <script>
-function openInVidBee(url) {
-  const vidbeeUrl = `vidbee://download?url=${encodeURIComponent(url)}`
-  window.location.href = vidbeeUrl
+function openInVidDownloadPro(url) {
+  const viddownloadproUrl = `viddownloadpro://download?url=${encodeURIComponent(url)}`
+  window.location.href = viddownloadproUrl
 }
 </script>
 ```
@@ -94,7 +94,7 @@ function openInVidBee(url) {
 To download an entire playlist:
 
 ```
-vidbee://download?url=<encoded-playlist-url>&type=playlist
+viddownloadpro://download?url=<encoded-playlist-url>&type=playlist
 ```
 
 **Parameters:**
@@ -105,27 +105,27 @@ vidbee://download?url=<encoded-playlist-url>&type=playlist
 
 ```javascript
 const playlistUrl = 'https://www.youtube.com/playlist?list=PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf'
-const vidbeeUrl = `vidbee://download?url=${encodeURIComponent(playlistUrl)}&type=playlist`
-window.location.href = vidbeeUrl
+const viddownloadproUrl = `viddownloadpro://download?url=${encodeURIComponent(playlistUrl)}&type=playlist`
+window.location.href = viddownloadproUrl
 ```
 
 ## How It Works
 
-1. **Protocol Registration**: VidBee registers as the handler for the `vidbee://` protocol during installation
-2. **URL Parsing**: When a `vidbee://download?url=...` link is clicked, the OS launches VidBee
-3. **Queue Processing**: VidBee extracts the video URL and adds it to the download queue
+1. **Protocol Registration**: VidDownloadPro registers as the handler for the `viddownloadpro://` protocol during installation
+2. **URL Parsing**: When a `viddownloadpro://download?url=...` link is clicked, the OS launches VidDownloadPro
+3. **Queue Processing**: VidDownloadPro extracts the video URL and adds it to the download queue
 4. **Auto-start**: The download begins automatically if the app is configured for auto-download
 
 ## Browser Compatibility
 
-The `vidbee://` protocol works across all major browsers:
+The `viddownloadpro://` protocol works across all major browsers:
 - Chrome/Edge/Brave
 - Firefox
 - Safari
 
 ## Security Notes
 
-- Only URLs starting with `vidbee://` will trigger the app
+- Only URLs starting with `viddownloadpro://` will trigger the app
 - The app validates the URL format before processing
 - Malformed URLs are ignored with a warning in the logs
 
@@ -133,17 +133,17 @@ The `vidbee://` protocol works across all major browsers:
 
 ### Protocol Not Working
 
-If clicking `vidbee://` links doesn't open VidBee:
+If clicking `viddownloadpro://` links doesn't open VidDownloadPro:
 
-1. **Check installation**: Ensure VidBee is properly installed
-2. **Reinstall**: Try reinstalling VidBee to re-register the protocol
+1. **Check installation**: Ensure VidDownloadPro is properly installed
+2. **Reinstall**: Try reinstalling VidDownloadPro to re-register the protocol
 3. **OS permissions**: On macOS, check System Settings > Privacy & Security for any blocks
 4. **Browser settings**: Some browsers may require you to allow the protocol on first use
 
 ### App Opens But Doesn't Download
 
-If VidBee opens but the download doesn't start:
+If VidDownloadPro opens but the download doesn't start:
 
 1. **Check URL encoding**: Ensure the video URL is properly encoded with `encodeURIComponent()`
 2. **Check logs**: Open the app and check the developer console for errors
-3. **Supported sites**: Verify the URL is from a [supported site](https://vidbee.org/supported-sites/)
+3. **Supported sites**: Verify the URL is from a [supported site](https://viddownloadpro.org/supported-sites/)

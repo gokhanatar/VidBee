@@ -1,3 +1,4 @@
+import { logger } from '@renderer/lib/logger'
 import {
   type SubscriptionFormData,
   SubscriptionFormDialog
@@ -282,7 +283,7 @@ export function Subscriptions() {
           updatePayload.feedUrl = resolved.feedUrl
           updatePayload.platform = resolved.platform
         } catch (error) {
-          console.error('Failed to resolve feed URL:', error)
+          logger.error('Failed to resolve feed URL:', error)
           toast.error(t('subscriptions.notifications.resolveError'))
           return
         }
@@ -292,7 +293,7 @@ export function Subscriptions() {
         await updateSubscription({ id, data: updatePayload })
         await refreshSubscription(id)
       } catch (error) {
-        console.error('Failed to update subscription:', error)
+        logger.error('Failed to update subscription:', error)
         toast.error(
           isDuplicateFeedError(error)
             ? t('subscriptions.notifications.duplicateUrl')
@@ -325,7 +326,7 @@ export function Subscriptions() {
         toast.success(t('subscriptions.notifications.created'))
         setAddDialogOpen(false)
       } catch (error) {
-        console.error('Failed to create subscription:', error)
+        logger.error('Failed to create subscription:', error)
         toast.error(
           isDuplicateFeedError(error)
             ? t('subscriptions.notifications.duplicateUrl')
@@ -340,7 +341,7 @@ export function Subscriptions() {
     try {
       await ipcServices.fs.openExternal('https://docs.rsshub.app/routes/')
     } catch (error) {
-      console.error('Failed to open RSSHub documentation:', error)
+      logger.error('Failed to open RSSHub documentation:', error)
       toast.error(t('subscriptions.notifications.openLinkError'))
     }
   }, [t])
@@ -393,7 +394,7 @@ export function Subscriptions() {
 
         {/* Add RSS Button */}
         <Button
-          className="flex h-auto w-20 flex-col items-center gap-1 rounded-2xl px-2 py-2 transition-all hover:opacity-80 bg-transparent hover:bg-neutral-100 shrink-0 grow-0"
+          className="flex h-auto w-20 flex-col items-center gap-1 rounded-2xl px-2 py-2 transition-all hover:opacity-80 bg-transparent hover:bg-muted shrink-0 grow-0"
           variant="ghost"
           onClick={() => setAddDialogOpen(true)}
         >
@@ -513,7 +514,7 @@ function SubscriptionCard({ subscription }: { subscription: SubscriptionRule }) 
               const historyItem = await ipcServices.history.getHistoryById(downloadId)
               return { downloadId, status: historyItem?.status ?? null }
             } catch (error) {
-              console.error('Failed to fetch download history entry:', error)
+              logger.error('Failed to fetch download history entry:', error)
               return { downloadId, status: null }
             }
           })
@@ -538,7 +539,7 @@ function SubscriptionCard({ subscription }: { subscription: SubscriptionRule }) 
           return changed ? next : prev
         })
       } catch (error) {
-        console.error('Failed to resolve download history statuses:', error)
+        logger.error('Failed to resolve download history statuses:', error)
       }
     }
 
@@ -571,7 +572,7 @@ function SubscriptionCard({ subscription }: { subscription: SubscriptionRule }) 
     try {
       await ipcServices.fs.openExternal(url)
     } catch (error) {
-      console.error('Failed to open subscription item link:', error)
+      logger.error('Failed to open subscription item link:', error)
       toast.error(t('subscriptions.notifications.openLinkError'))
     }
   }
@@ -590,7 +591,7 @@ function SubscriptionCard({ subscription }: { subscription: SubscriptionRule }) 
         }
         toast.info(t('subscriptions.notifications.itemAlreadyQueued'))
       } catch (error) {
-        console.error('Failed to queue subscription item:', error)
+        logger.error('Failed to queue subscription item:', error)
         toast.error(t('subscriptions.notifications.queueError'))
       }
     },

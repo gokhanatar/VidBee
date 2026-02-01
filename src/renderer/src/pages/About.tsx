@@ -1,3 +1,4 @@
+import { logger } from '@renderer/lib/logger'
 import { FeedbackLinkButtons, useAppInfo } from '@renderer/components/feedback/FeedbackLinks'
 import { Badge } from '@renderer/components/ui/badge'
 import { Button } from '@renderer/components/ui/button'
@@ -12,6 +13,7 @@ import {
   FileText,
   Github,
   Link as LinkIcon,
+  Loader2,
   MessageSquare,
   RefreshCw,
   Twitter
@@ -48,8 +50,9 @@ export function About() {
   const appVersionLabel = appVersion || '—'
   const [latestVersionState, setLatestVersionState] = useState<LatestVersionState>(null)
   const [updateDownloadProgress, setUpdateDownloadProgress] = useState<number | null>(null)
+  const [isCheckingUpdate, setIsCheckingUpdate] = useState(false)
   const saveSetting = useSetAtom(saveSettingAtom)
-  const shareTargetUrl = 'https://vidbee.org'
+  const shareTargetUrl = 'https://viddownloadpro.org'
 
   useEffect(() => {
     if (!updateAvailableState.available) {
@@ -151,14 +154,14 @@ export function About() {
           })
         }
       } catch (error) {
-        console.error('Failed to check for updates:', error)
+        logger.error('Failed to check for updates:', error)
         toast.error(t('about.notifications.updateError', { error: 'Unknown error' }))
       }
     }
   }
 
   const handleGoToDownload = () => {
-    openShareUrl('https://vidbee.org/download/')
+    openShareUrl('https://viddownloadpro.org/download/')
   }
 
   const handleRestartToUpdate = () => {
@@ -166,8 +169,8 @@ export function About() {
   }
 
   const handleCheckForUpdates = async () => {
+    setIsCheckingUpdate(true)
     try {
-      toast.info(t('about.notifications.checkingUpdates'))
       const result = await ipcServices.update.checkForUpdates()
 
       if (result.available) {
@@ -198,11 +201,13 @@ export function About() {
         })
       }
     } catch (error) {
-      console.error('Failed to check for updates:', error)
+      logger.error('Failed to check for updates:', error)
       toast.error(t('about.notifications.updateError', { error: 'Unknown error' }))
       setLatestVersionState({
         status: 'error'
       })
+    } finally {
+      setIsCheckingUpdate(false)
     }
   }
 
@@ -237,7 +242,7 @@ export function About() {
       await navigator.clipboard.writeText(shareTargetUrl)
       toast.success(t('notifications.urlCopied'))
     } catch (error) {
-      console.error('Failed to copy share link:', error)
+      logger.error('Failed to copy share link:', error)
       toast.error(t('notifications.copyFailed'))
     }
   }
@@ -266,14 +271,14 @@ export function About() {
         label: t('about.resources.website'),
         description: t('about.resources.websiteDescription'),
         actionLabel: t('about.actions.visit'),
-        href: 'https://vidbee.org/'
+        href: 'https://viddownloadpro.org/'
       },
       {
         icon: FileText,
         label: t('about.resources.changelog'),
         description: t('about.resources.changelogDescription'),
         actionLabel: t('about.actions.view'),
-        href: 'https://github.com/nexmoe/VidBee/releases'
+        href: 'https://github.com/nexmoe/VidDownloadPro/releases'
       }
     ],
     [t]
@@ -286,7 +291,7 @@ export function About() {
           <CardContent className="pt-6">
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-4">
-                <img src="./app-icon.png" alt="VidBee" className="h-18 w-18 rounded-2xl" />
+                <img src="./app-icon.png" alt="VidDownloadPro" className="h-18 w-18 rounded-2xl" />
                 <div className="flex-1 space-y-2">
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex items-center gap-3">
@@ -310,7 +315,7 @@ export function About() {
                     <div className="flex flex-wrap items-center gap-2">
                       <Button variant="outline" size="sm" asChild>
                         <a
-                          href="https://github.com/nexmoe/vidbee"
+                          href="https://github.com/nexmoe/viddownloadpro"
                           target="_blank"
                           rel="noreferrer"
                           aria-label={t('about.actions.openRepo')}
@@ -341,8 +346,8 @@ export function About() {
                         </Button>
                       ) : null}
                       {shouldShowCheckUpdates ? (
-                        <Button onClick={handleCheckForUpdates} size="sm" className="gap-2">
-                          <RefreshCw className="h-3.5 w-3.5" />
+                        <Button onClick={handleCheckForUpdates} size="sm" className="gap-2" disabled={isCheckingUpdate}>
+                          {isCheckingUpdate ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <RefreshCw className="h-3.5 w-3.5" />}
                           {t('about.actions.checkUpdates')}
                         </Button>
                       ) : null}

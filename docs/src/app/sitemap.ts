@@ -4,7 +4,7 @@ import { source } from '@/lib/source';
 
 export const dynamic = 'force-static';
 
-const baseUrl = 'https://docs.vidbee.org';
+const baseUrl = 'https://docs.viddownloadpro.org';
 
 function buildPath(segments: string[]): string {
   if (segments.length === 0) {

@@ -1,5 +1,6 @@
 import { Button, type ButtonProps } from '@renderer/components/ui/button'
 import { ipcServices } from '@renderer/lib/ipc'
+import { logger } from '@renderer/lib/logger'
 import { Github, MessageCircle, Twitter } from 'lucide-react'
 import { type MouseEvent, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -11,7 +12,7 @@ type AppInfo = {
 }
 
 const DEFAULT_APP_INFO: AppInfo = { appVersion: '', osVersion: '' }
-const FEEDBACK_TWEET_PREFIX = '@nexmoex VidBee'
+const FEEDBACK_TWEET_PREFIX = '@nexmoex VidDownloadPro'
 export const DOWNLOAD_FEEDBACK_ISSUE_TITLE = '[Bug]: Download error report'
 const FEEDBACK_UNKNOWN_ERROR = 'Unknown error'
 const FEEDBACK_UNKNOWN_VALUE = 'Unknown'
@@ -64,7 +65,7 @@ const loadAppInfo = async (): Promise<AppInfo> => {
       ])
       cachedAppInfo = { appVersion: version, osVersion: osRelease }
     } catch (error) {
-      console.error('Failed to load app info for feedback links:', error)
+      logger.error('Failed to load app info for feedback links:', error)
       cachedAppInfo = DEFAULT_APP_INFO
     }
     return cachedAppInfo
@@ -156,12 +157,12 @@ export const FeedbackLinkButtons = ({
           FEEDBACK_COMMAND_LABEL
         )
       : null
-    const appVersionValue = appVersion ? `VidBee v${appVersion}` : FEEDBACK_UNKNOWN_VALUE
+    const appVersionValue = appVersion ? `VidDownloadPro v${appVersion}` : FEEDBACK_UNKNOWN_VALUE
     const osVersionValue = osVersion || FEEDBACK_UNKNOWN_VALUE
 
     let githubUrl: string
     if (useSimpleGithubUrl) {
-      githubUrl = 'https://github.com/nexmoe/VidBee/issues/new/choose'
+      githubUrl = 'https://github.com/nexmoe/VidDownloadPro/issues/new/choose'
     } else {
       const issueParams = new URLSearchParams({
         template: 'bug_report.yml',
@@ -176,7 +177,7 @@ export const FeedbackLinkButtons = ({
         issueParams.set('os_version', osVersionValue)
       }
 
-      githubUrl = `https://github.com/nexmoe/VidBee/issues/new?${issueParams.toString()}`
+      githubUrl = `https://github.com/nexmoe/VidDownloadPro/issues/new?${issueParams.toString()}`
     }
 
     return [

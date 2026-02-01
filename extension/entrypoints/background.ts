@@ -87,7 +87,7 @@ const fetchJson = async <T>(url: string, timeoutMs: number): Promise<T> => {
       throw new Error('Request timed out.')
     }
     if (error instanceof Error && error.message.includes('Failed to fetch')) {
-      throw new Error('VidBee app not responding on this port.')
+      throw new Error('VidDownloadPro app not responding on this port.')
     }
     throw error
   } finally {
@@ -111,13 +111,13 @@ const findAvailablePort = async (): Promise<number | null> => {
 const requestVideoInfo = async (targetUrl: string): Promise<VideoInfo> => {
   const port = await findAvailablePort()
   if (!port) {
-    throw new Error('VidBee app not found on localhost.')
+    throw new Error('VidDownloadPro app not found on localhost.')
   }
 
   const baseUrl = `http://127.0.0.1:${port}`
   const tokenResponse = await fetchJson<{ token?: string }>(`${baseUrl}/token`, STATUS_TIMEOUT_MS)
   if (!tokenResponse.token) {
-    throw new Error('Failed to acquire token from VidBee.')
+    throw new Error('Failed to acquire token from VidDownloadPro.')
   }
 
   return fetchJson<VideoInfo>(

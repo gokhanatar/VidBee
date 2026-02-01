@@ -1,3 +1,4 @@
+import { logger } from '@renderer/lib/logger'
 import { Button } from '@renderer/components/ui/button'
 import { Checkbox } from '@renderer/components/ui/checkbox'
 import {
@@ -151,7 +152,7 @@ export function SubscriptionFormDialog({
       try {
         await resolveFeed(url.trim())
       } catch (error) {
-        console.error('Failed to resolve feed:', error)
+        logger.error('Failed to resolve feed:', error)
       } finally {
         setDetectingFeed(false)
       }
@@ -171,7 +172,7 @@ export function SubscriptionFormDialog({
         setDownloadDirectory(path)
       }
     } catch (error) {
-      console.error('Failed to select directory:', error)
+      logger.error('Failed to select directory:', error)
       toast.error(t('subscriptions.notifications.directoryError'))
     }
   }
@@ -180,7 +181,7 @@ export function SubscriptionFormDialog({
     try {
       await ipcServices.fs.openExternal('https://docs.rsshub.app/routes/')
     } catch (error) {
-      console.error('Failed to open RSSHub documentation:', error)
+      logger.error('Failed to open RSSHub documentation:', error)
       toast.error(t('subscriptions.notifications.openLinkError'))
     }
   }
@@ -210,7 +211,7 @@ export function SubscriptionFormDialog({
           await resolveFeed(url.trim())
           formData.url = url.trim()
         } catch (error) {
-          console.error('Failed to resolve feed:', error)
+          logger.error('Failed to resolve feed:', error)
           toast.error(t('subscriptions.notifications.resolveError'))
           return
         }

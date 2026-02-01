@@ -10,17 +10,17 @@
       "view": "檢視",
       "visit": "造訪"
     },
-    "appName": "VidBee",
+    "appName": "VidDownloadPro",
     "autoUpdateDescription": "在背景自動下載並安裝新版本。",
     "autoUpdateTitle": "自動更新",
     "betaProgramDescription": "搶先獲得預覽版和即將發布的新功能。",
     "betaProgramTitle": "預覽通道",
-    "description": "VidBee 是一個基於 Node.js 和 Electron 構建的自由開源應用，使用 yt-dlp 來完成下載。",
+    "description": "VidDownloadPro 是一個基於 Node.js 和 Electron 構建的自由開源應用，使用 yt-dlp 來完成下載。",
     "followAuthorActions": {
       "follow": "關注 @nexmoex"
     },
-    "followAuthorDescription": "獲取 VidBee 的最新消息和更新。",
-    "followAuthorSupport": "在 X (Twitter) 上關注開發者，獲取 VidBee 的最新更新和消息。",
+    "followAuthorDescription": "獲取 VidDownloadPro 的最新消息和更新。",
+    "followAuthorSupport": "在 X (Twitter) 上關注開發者，獲取 VidDownloadPro 的最新更新和消息。",
     "followAuthorTitle": "關注開發者",
     "here": "此處",
     "homepage": "首頁",
@@ -61,15 +61,15 @@
       "website": "官方網站",
       "websiteDescription": "產品亮點、路線圖與社群動態。"
     },
-    "resourcesDescription": "了解 VidBee 並保持關注的實用連結。",
+    "resourcesDescription": "了解 VidDownloadPro 並保持關注的實用連結。",
     "resourcesTitle": "資源",
     "shareActions": {
       "copy": "複製連結",
       "facebook": "在 Facebook 上分享",
       "twitter": "在 X (Twitter) 上分享"
     },
-    "shareDescription": "一鍵與您的社群分享 VidBee。",
-    "shareSupport": "向您的朋友推薦 VidBee 以支援我們的成長和更新。",
+    "shareDescription": "一鍵與您的社群分享 VidDownloadPro。",
+    "shareSupport": "向您的朋友推薦 VidDownloadPro 以支援我們的成長和更新。",
     "shareTitle": "廣為宣傳",
     "sourceCode": "原始碼已開放",
     "title": "關於",
@@ -102,7 +102,7 @@
   },
   "app": {
     "description": "從數百個網站下載影片和音訊",
-    "title": "VidBee"
+    "title": "VidDownloadPro"
   },
   "download": {
     "active": "進行中",
@@ -228,7 +228,9 @@
     "componentStack": "元件堆疊",
     "noStackTrace": "沒有可用的堆疊追蹤",
     "fullReport": "完整錯誤報告",
-    "helpText": "若此錯誤持續，請複製上方的錯誤報告並與支援團隊分享。聯絡資訊可在「關於」頁面找到。"
+    "helpText": "若此錯誤持續，請複製上方的錯誤報告並與支援團隊分享。聯絡資訊可在「關於」頁面找到。",
+    "pageError": "頁面發生錯誤",
+    "notFound": "找不到頁面"
   },
   "errors": {
     "clickToCopy": "點擊複製詳情",
@@ -423,11 +425,11 @@
     "languageDescription": "選擇應用程式介面的偏好語言",
     "light": "淺色",
     "hideDockIcon": "隱藏 Dock 圖標",
-    "hideDockIconDescription": "從 macOS Dock 中刪除 VidBee。使用菜單欄或託盤圖標重新打開應用程序。",
+    "hideDockIconDescription": "從 macOS Dock 中刪除 VidDownloadPro。使用菜單欄或託盤圖標重新打開應用程序。",
     "launchAtLogin": "啟動時啟動",
-    "launchAtLoginDescription": "登錄計算機後自動打開 VidBee。",
+    "launchAtLoginDescription": "登錄計算機後自動打開 VidDownloadPro。",
     "launchAtLoginUnsupported": "自動啟動僅適用於 macOS 和 Windows。",
-    "enableAnalytics": "幫助改進 VidBee",
+    "enableAnalytics": "幫助改進 VidDownloadPro",
     "enableAnalyticsDescription": "共享匿名使用數據，幫助我們了解應用程序的使用情況並確定改進的優先順序。",
     "embedChapters": "嵌入章節",
     "embedChaptersDescription": "可用時在檔案中加入章節標記",
@@ -438,7 +440,7 @@
     "embedThumbnail": "嵌入縮圖",
     "embedThumbnailDescription": "將縮圖作為封面圖",
     "shareWatermark": "分享水印",
-    "shareWatermarkDescription": "加入包含原始標題、作者與 VidBee 品牌的水印",
+    "shareWatermarkDescription": "加入包含原始標題、作者與 VidDownloadPro 品牌的水印",
     "maxConcurrentDownloads": "最大活動下載數",
     "maxConcurrentDownloadsDescription": "最大同時下載數量",
     "none": "無",
@@ -468,13 +470,15 @@
     },
     "system": "系統",
     "theme": "主題",
-    "themeDescription": "為 VidBee 選擇淺色、深色或系統主題",
+    "themeDescription": "為 VidDownloadPro 選擇淺色、深色或系統主題",
     "title": "設定",
     "tray": {
       "quit": "結束",
       "showHome": "顯示首頁"
     },
-    "video": "影片偏好"
+    "video": "影片偏好",
+    "settingLoadError": "無法載入設定",
+    "saveError": "無法儲存設定"
   },
   "subscriptions": {
     "title": "訂閱",
@@ -482,15 +486,15 @@
     "description": "自動監控 RSS 源並對新下載進行排隊，無需手動操作。",
     "defaults": {
       "title": "自動化默認值",
-      "description": "控制訂閱下載的存儲位置以及 VidBee 檢查新視頻的頻率。",
+      "description": "控制訂閱下載的存儲位置以及 VidDownloadPro 檢查新視頻的頻率。",
       "downloadDirectory": "下載目錄",
       "filenameTemplate": "文件名模板（僅限文件）",
       "onlyLatest": "僅下載最新視頻",
-      "onlyLatestDescription": "啟用後，VidBee 會跳過較舊的積壓項目，僅獲取最新上傳的項目。"
+      "onlyLatestDescription": "啟用後，VidDownloadPro 會跳過較舊的積壓項目，僅獲取最新上傳的項目。"
     },
     "add": {
       "title": "添加RSS",
-      "description": "粘貼 RSS 源鏈接。 VidBee 將自動檢測提要。"
+      "description": "粘貼 RSS 源鏈接。 VidDownloadPro 將自動檢測提要。"
     },
     "fields": {
       "url": "提要網址",
@@ -581,7 +585,7 @@
     },
     "rssHub": {
       "title": "使用 RSSHub 自動訂閱",
-      "description": "將 VidBee 與 RSSHub 結合起來，可以從各種平台實現自動訂閱和下載。設置完成後，VidBee 將在後台運行並自動下載最新的視頻和內容。",
+      "description": "將 VidDownloadPro 與 RSSHub 結合起來，可以從各種平台實現自動訂閱和下載。設置完成後，VidDownloadPro 將在後台運行並自動下載最新的視頻和內容。",
       "learnMore": "了解有關 RSSHub 的更多信息",
       "openDocs": "打開 RSSHub 文檔",
       "hint": "沒有 RSS 源 URL？使用 RSSHub 為 YouTube、Twitter 和數千個其他平台生成 RSS 源。"
@@ -592,7 +596,7 @@
     "moreDescription": "完整的 yt-dlp 清單由社群持續更新。",
     "moreTitle": "需要其他網站？",
     "openFullList": "開啟全部支援網站清單",
-    "pageDescription": "VidBee 使用 yt-dlp 覆蓋數百個資源。",
+    "pageDescription": "VidDownloadPro 使用 yt-dlp 覆蓋數百個資源。",
     "pageIntro": "以下是大家最常下載的主流服務。",
     "pageTitle": "支援的網站",
     "popular": {
@@ -671,5 +675,36 @@
     },
     "popularSection": "主流平台",
     "viewAll": "檢視全部支援的網站"
+  },
+  "dashboard": {
+    "chart": {
+      "downloads": "下載次數"
+    }
+  },
+  "premium": {
+    "title": "升級到進階版",
+    "subtitle": "解鎖所有功能並移除限制",
+    "features": {
+      "feature1": "每日無限下載",
+      "feature2": "所有畫質選項（1080p、4K、8K）",
+      "feature3": "播放清單批次下載",
+      "feature4": "下載無浮水印"
+    },
+    "subscribe": "訂閱",
+    "restore": "恢復購買",
+    "terms": "服務條款",
+    "privacy": "隱私權政策",
+    "alreadyPremium": "您是進階會員",
+    "purchaseSuccess": "歡迎加入進階版！",
+    "purchaseFailed": "購買失敗，請重試。",
+    "restoreSuccess": "購買已成功恢復",
+    "restoreFailed": "沒有可恢復的購買",
+    "billingIssueTitle": "偵測到帳單問題",
+    "billingIssueDescription": "請更新您的付款方式以繼續訂閱。",
+    "playlistProOnly": "播放清單下載是 Pro 功能",
+    "playlistProDescription": "升級到 Pro 一次下載整個播放清單。",
+    "dailyLimitReached": "已達到每日下載上限。升級到 Pro 享受無限下載。",
+    "remainingDownloads": "今日剩餘 {{count}} 次下載",
+    "watermarkFreeDescription": "升級到 Pro 移除下載中的浮水印。"
   }
 }

@@ -105,6 +105,7 @@ export function Sidebar({ currentPage, onPageChange, onOpenSupportedSites }: Sid
           variant="ghost"
           size="icon"
           onClick={handleClick}
+          aria-label={item.label}
           className={`no-drag rounded-2xl w-12 h-12 ${isActive ? 'bg-primary/10' : ''}`}
         >
           <IconComponent className={`h-5! w-5! ${isActive ? 'text-primary' : ''}`} />
@@ -124,10 +125,10 @@ export function Sidebar({ currentPage, onPageChange, onOpenSupportedSites }: Sid
       {/* App Logo */}
       <div className="flex flex-col items-center gap-1 py-3 mt-4">
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="./app-icon.png" alt="VidBee" className="w-10 h-10" />
+          <img src="./app-icon.png" alt="VidDownloadPro" className="w-10 h-10" />
         </div>
         <span className="text-xs text-muted-foreground font-bold text-center leading-tight">
-          VidBee
+          VidDownloadPro
         </span>
       </div>
 

@@ -14,7 +14,7 @@ export default async function Page(props: PageProps<'/[lang]/[[...slug]]'>) {
   const MDX = page.data.body;
   const gitConfig = {
     user: 'nexmoe',
-    repo: 'VidBee',
+    repo: 'VidDownloadPro',
     branch: 'main',
   };
 
@@ -57,11 +57,11 @@ export async function generateMetadata(
   const page = source.getPage(params.slug, params.lang);
   if (!page) notFound();
 
-  const baseUrl = 'https://docs.vidbee.org';
+  const baseUrl = 'https://docs.viddownloadpro.org';
   const canonicalUrl = `${baseUrl}${page.url}`;
 
   return {
-    title: `${page.data.title} | VidBee Docs`,
+    title: `${page.data.title} | VidDownloadPro Docs`,
     description: page.data.description,
     openGraph: {
       images: getPageImage(page).url,

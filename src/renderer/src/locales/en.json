@@ -10,17 +10,17 @@
       "view": "View",
       "visit": "Visit"
     },
-    "appName": "VidBee",
+    "appName": "VidDownloadPro",
     "autoUpdateDescription": "Download and install new releases automatically in the background.",
     "autoUpdateTitle": "Auto updates",
     "betaProgramDescription": "Receive early builds and upcoming features before everyone else.",
     "betaProgramTitle": "Preview channel",
-    "description": "VidBee - Free and open-source automated video downloader with RSS auto-download, batch processing, and support for 1000+ platforms.",
+    "description": "VidDownloadPro - Free and open-source automated video downloader with RSS auto-download, batch processing, and support for 1000+ platforms.",
     "followAuthorActions": {
       "follow": "Follow @nexmoex"
     },
-    "followAuthorDescription": "Stay updated with the latest VidBee news and updates.",
-    "followAuthorSupport": "Follow the developer on X (Twitter) to get the latest updates and news about VidBee.",
+    "followAuthorDescription": "Stay updated with the latest VidDownloadPro news and updates.",
+    "followAuthorSupport": "Follow the developer on X (Twitter) to get the latest updates and news about VidDownloadPro.",
     "followAuthorTitle": "Follow the Developer",
     "here": "here",
     "homepage": "Homepage",
@@ -61,15 +61,15 @@
       "website": "Official website",
       "websiteDescription": "Product highlights, roadmap, and community news."
     },
-    "resourcesDescription": "Useful links to learn more about VidBee and stay connected.",
+    "resourcesDescription": "Useful links to learn more about VidDownloadPro and stay connected.",
     "resourcesTitle": "Resources",
     "shareActions": {
       "copy": "Copy link",
       "facebook": "Share on Facebook",
       "twitter": "Share on X (Twitter)"
     },
-    "shareDescription": "Share VidBee with your community in one click.",
-    "shareSupport": "Recommend VidBee to your friends to support our growth and updates.",
+    "shareDescription": "Share VidDownloadPro with your community in one click.",
+    "shareSupport": "Recommend VidDownloadPro to your friends to support our growth and updates.",
     "shareTitle": "Spread the word",
     "sourceCode": "Source Code is available",
     "title": "About",
@@ -102,7 +102,7 @@
   },
   "app": {
     "description": "Download videos and audios from hundreds of sites",
-    "title": "VidBee"
+    "title": "VidDownloadPro"
   },
   "download": {
     "active": "Active",
@@ -216,6 +216,8 @@
     "description": "An unexpected error occurred. Please try reloading the application or report this issue if it persists.",
     "message": "Error Message",
     "unknownError": "Unknown error occurred",
+    "pageError": "Something went wrong on this page. Try going back to the home page.",
+    "notFound": "The page you are looking for does not exist.",
     "goHome": "Go Home",
     "reload": "Reload App",
     "copyReport": "Copy Error Report",
@@ -423,11 +425,11 @@
     "languageDescription": "Choose your preferred language for the application interface",
     "light": "Light",
     "hideDockIcon": "Hide Dock icon",
-    "hideDockIconDescription": "Remove VidBee from the macOS Dock. Use the menu bar or tray icon to reopen the app.",
+    "hideDockIconDescription": "Remove VidDownloadPro from the macOS Dock. Use the menu bar or tray icon to reopen the app.",
     "launchAtLogin": "Launch at startup",
-    "launchAtLoginDescription": "Open VidBee automatically after you sign in to your computer.",
+    "launchAtLoginDescription": "Open VidDownloadPro automatically after you sign in to your computer.",
     "launchAtLoginUnsupported": "Auto launch is only available on macOS and Windows.",
-    "enableAnalytics": "Help improve VidBee",
+    "enableAnalytics": "Help improve VidDownloadPro",
     "enableAnalyticsDescription": "Share anonymous usage data to help us understand how the app is used and prioritize improvements.",
     "embedChapters": "Embed chapters",
     "embedChaptersDescription": "Add chapter markers to the file when available",
@@ -438,7 +440,7 @@
     "embedThumbnail": "Embed thumbnail",
     "embedThumbnailDescription": "Add the thumbnail as cover art",
     "shareWatermark": "Share watermark",
-    "shareWatermarkDescription": "Add a watermark with the original title, author, and VidBee branding",
+    "shareWatermarkDescription": "Add a watermark with the original title, author, and VidDownloadPro branding",
     "maxConcurrentDownloads": "Maximum number of active downloads",
     "maxConcurrentDownloadsDescription": "Maximum number of simultaneous downloads",
     "none": "None",
@@ -468,7 +470,9 @@
     },
     "system": "System",
     "theme": "Theme",
-    "themeDescription": "Choose a light, dark, or system theme for VidBee",
+    "themeDescription": "Choose a light, dark, or system theme for VidDownloadPro",
+    "settingLoadError": "Failed to load setting",
+    "saveError": "Failed to save setting",
     "title": "Settings",
     "tray": {
       "quit": "Quit",
@@ -482,15 +486,15 @@
     "description": "Automatically monitor RSS feeds and queue new downloads without manual work.",
     "defaults": {
       "title": "Automation defaults",
-      "description": "Control where subscription downloads are stored and how often VidBee checks for new videos.",
+      "description": "Control where subscription downloads are stored and how often VidDownloadPro checks for new videos.",
       "downloadDirectory": "Download directory",
       "filenameTemplate": "Filename template",
       "onlyLatest": "Download only the latest video",
-      "onlyLatestDescription": "When enabled, VidBee skips older backlog items and only grabs the newest upload."
+      "onlyLatestDescription": "When enabled, VidDownloadPro skips older backlog items and only grabs the newest upload."
     },
     "add": {
       "title": "Add RSS",
-      "description": "Paste an RSS feed link. VidBee will detect the feed automatically."
+      "description": "Paste an RSS feed link. VidDownloadPro will detect the feed automatically."
     },
     "fields": {
       "url": "Feed URL",
@@ -581,7 +585,7 @@
     },
     "rssHub": {
       "title": "Automated Subscriptions with RSSHub",
-      "description": "Combine VidBee with RSSHub to enable automated subscriptions and downloads from various platforms. Once set up, VidBee runs in the background and automatically downloads the latest videos and content.",
+      "description": "Combine VidDownloadPro with RSSHub to enable automated subscriptions and downloads from various platforms. Once set up, VidDownloadPro runs in the background and automatically downloads the latest videos and content.",
       "learnMore": "Learn more about RSSHub",
       "openDocs": "Open RSSHub Documentation",
       "hint": "Don't have an RSS feed URL? Use RSSHub to generate RSS feeds for YouTube, Twitter, and thousands of other platforms."
@@ -592,7 +596,7 @@
     "moreDescription": "The complete yt-dlp list is updated constantly by the community.",
     "moreTitle": "Need another site?",
     "openFullList": "Open full supported sites list",
-    "pageDescription": "VidBee uses yt-dlp under the hood to reach hundreds of sources.",
+    "pageDescription": "VidDownloadPro uses yt-dlp under the hood to reach hundreds of sources.",
     "pageIntro": "Here are the mainstream services people download from most frequently.",
     "pageTitle": "Supported Sites",
     "popular": {
@@ -717,7 +721,9 @@
       "description": "Last 7 days download history",
       "total": "Total",
       "completed": "Completed",
-      "failed": "Failed"
+      "failed": "Failed",
+      "downloads": "downloads",
+      "noData": "No downloads in the last 7 days"
     },
     "popularSites": {
       "title": "Popular Sites",
@@ -753,5 +759,31 @@
       "export": "Export List",
       "delete": "Delete Selected"
     }
+  },
+  "premium": {
+    "title": "Upgrade to Premium",
+    "subtitle": "Unlock all features and remove limits",
+    "features": {
+      "feature1": "Unlimited daily downloads",
+      "feature2": "All quality options (1080p, 4K, 8K)",
+      "feature3": "Playlist batch download",
+      "feature4": "No watermark on downloads"
+    },
+    "subscribe": "Subscribe",
+    "restore": "Restore Purchases",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "alreadyPremium": "You are a Premium member",
+    "purchaseSuccess": "Welcome to Premium!",
+    "purchaseFailed": "Purchase failed. Please try again.",
+    "restoreSuccess": "Purchases restored successfully",
+    "restoreFailed": "No purchases to restore",
+    "billingIssueTitle": "Billing issue detected",
+    "billingIssueDescription": "Please update your payment method to continue your subscription.",
+    "playlistProOnly": "Playlist Download is a Pro Feature",
+    "playlistProDescription": "Upgrade to Pro to download entire playlists at once.",
+    "dailyLimitReached": "Daily download limit reached. Upgrade to Pro for unlimited downloads.",
+    "remainingDownloads": "{{count}} downloads left today",
+    "watermarkFreeDescription": "Upgrade to Pro to remove watermark from downloads."
   }
 }

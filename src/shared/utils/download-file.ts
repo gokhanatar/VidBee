@@ -35,7 +35,7 @@ export const buildFileNameCandidates = (
 
   return savedNameCandidates.length > 0
     ? savedNameCandidates
-    : [`${safeTitle} via VidBee.${format}`, `${safeTitle}.${format}`]
+    : [`${safeTitle} via VidDownloadPro.${format}`, `${safeTitle}.${format}`]
 }
 
 export const buildFilePathCandidates = (
@@ -55,7 +55,7 @@ export const normalizeFilenameKey = (value: string): string => {
   return value
     .normalize('NFKC')
     .toLowerCase()
-    .replace(/via\s*vidbee/gi, '')
+    .replace(/via\s*viddownloadpro/gi, '')
     .replace(/[^a-z0-9\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uac00-\ud7af]+/g, '')
 }
 

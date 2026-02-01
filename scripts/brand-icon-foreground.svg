@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Android adaptive icon foreground (no background) -->
+  <!-- Centered with padding for adaptive icon safe zone (66% of canvas) -->
+
+  <!-- V-shaped download arrow -->
+  <path d="M310,330 L512,680 L714,330"
+        fill="none" stroke="white" stroke-width="80"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Download base line -->
+  <line x1="310" y1="780" x2="714" y2="780"
+        stroke="white" stroke-width="80" stroke-linecap="round"/>
+</svg>

@@ -10,17 +10,17 @@
       "view": "Lihat",
       "visit": "Kunjungi"
     },
-    "appName": "VidBee",
+    "appName": "VidDownloadPro",
     "autoUpdateDescription": "Unduh dan instal rilis baru secara otomatis di latar belakang.",
     "autoUpdateTitle": "Pembaruan otomatis",
     "betaProgramDescription": "Terima build awal dan fitur yang akan datang sebelum orang lain.",
     "betaProgramTitle": "Saluran pratinjau",
-    "description": "VidBee adalah pengunduh gratis dan open-source yang dibangun dengan Electron dan didukung oleh yt-dlp.",
+    "description": "VidDownloadPro adalah pengunduh gratis dan open-source yang dibangun dengan Electron dan didukung oleh yt-dlp.",
     "followAuthorActions": {
       "follow": "Ikuti @nexmoex"
     },
-    "followAuthorDescription": "Tetap update dengan berita dan pembaruan VidBee terbaru.",
-    "followAuthorSupport": "Ikuti pengembang di X (Twitter) untuk mendapatkan pembaruan dan berita terbaru tentang VidBee.",
+    "followAuthorDescription": "Tetap update dengan berita dan pembaruan VidDownloadPro terbaru.",
+    "followAuthorSupport": "Ikuti pengembang di X (Twitter) untuk mendapatkan pembaruan dan berita terbaru tentang VidDownloadPro.",
     "followAuthorTitle": "Ikuti Pengembang",
     "here": "di sini",
     "homepage": "Beranda",
@@ -61,15 +61,15 @@
       "website": "Situs web resmi",
       "websiteDescription": "Sorotan produk, roadmap, dan berita komunitas."
     },
-    "resourcesDescription": "Tautan berguna untuk mempelajari lebih lanjut tentang VidBee dan tetap terhubung.",
+    "resourcesDescription": "Tautan berguna untuk mempelajari lebih lanjut tentang VidDownloadPro dan tetap terhubung.",
     "resourcesTitle": "Sumber Daya",
     "shareActions": {
       "copy": "Salin tautan",
       "facebook": "Bagikan di Facebook",
       "twitter": "Bagikan di X (Twitter)"
     },
-    "shareDescription": "Bagikan VidBee dengan komunitas Anda dalam satu klik.",
-    "shareSupport": "Rekomendasikan VidBee kepada teman-teman Anda untuk mendukung pertumbuhan dan pembaruan kami.",
+    "shareDescription": "Bagikan VidDownloadPro dengan komunitas Anda dalam satu klik.",
+    "shareSupport": "Rekomendasikan VidDownloadPro kepada teman-teman Anda untuk mendukung pertumbuhan dan pembaruan kami.",
     "shareTitle": "Sebarkan berita",
     "sourceCode": "Kode Sumber tersedia",
     "title": "Tentang",
@@ -102,7 +102,7 @@
   },
   "app": {
     "description": "Unduh video dan audio dari ratusan situs",
-    "title": "VidBee"
+    "title": "VidDownloadPro"
   },
   "download": {
     "active": "Aktif",
@@ -228,7 +228,9 @@
     "componentStack": "Tumpukan komponen",
     "noStackTrace": "Tidak ada jejak tumpukan yang tersedia",
     "fullReport": "Laporan kesalahan lengkap",
-    "helpText": "Jika kesalahan ini terus terjadi, silakan salin laporan kesalahan di atas dan bagikan dengan tim dukungan. Informasi kontak dapat ditemukan di halaman Tentang."
+    "helpText": "Jika kesalahan ini terus terjadi, silakan salin laporan kesalahan di atas dan bagikan dengan tim dukungan. Informasi kontak dapat ditemukan di halaman Tentang.",
+    "pageError": "Terjadi kesalahan halaman",
+    "notFound": "Halaman tidak ditemukan"
   },
   "errors": {
     "clickToCopy": "Klik untuk menyalin detail",
@@ -423,11 +425,11 @@
     "languageDescription": "Pilih bahasa pilihan Anda untuk antarmuka aplikasi",
     "light": "Terang",
     "hideDockIcon": "Sembunyikan ikon Dock",
-    "hideDockIconDescription": "Hapus VidBee dari Dock macOS. Gunakan menu bar atau ikon tray untuk membuka kembali aplikasi.",
+    "hideDockIconDescription": "Hapus VidDownloadPro dari Dock macOS. Gunakan menu bar atau ikon tray untuk membuka kembali aplikasi.",
     "launchAtLogin": "Luncurkan saat startup",
-    "launchAtLoginDescription": "Buka VidBee secara otomatis setelah Anda masuk ke komputer Anda.",
+    "launchAtLoginDescription": "Buka VidDownloadPro secara otomatis setelah Anda masuk ke komputer Anda.",
     "launchAtLoginUnsupported": "Peluncuran otomatis hanya tersedia di macOS dan Windows.",
-    "enableAnalytics": "Bantu tingkatkan VidBee",
+    "enableAnalytics": "Bantu tingkatkan VidDownloadPro",
     "enableAnalyticsDescription": "Bagikan data penggunaan anonim untuk membantu kami memahami bagaimana aplikasi digunakan dan memprioritaskan peningkatan.",
     "embedChapters": "Sematkan bab",
     "embedChaptersDescription": "Tambahkan penanda bab ke file saat tersedia",
@@ -438,7 +440,7 @@
     "embedThumbnail": "Sematkan thumbnail",
     "embedThumbnailDescription": "Tambahkan thumbnail sebagai sampul",
     "shareWatermark": "Tanda air berbagi",
-    "shareWatermarkDescription": "Tambahkan tanda air dengan judul asli, pembuat, dan merek VidBee",
+    "shareWatermarkDescription": "Tambahkan tanda air dengan judul asli, pembuat, dan merek VidDownloadPro",
     "maxConcurrentDownloads": "Jumlah maksimum unduhan aktif",
     "maxConcurrentDownloadsDescription": "Jumlah maksimum unduhan bersamaan",
     "none": "Tidak ada",
@@ -468,13 +470,15 @@
     },
     "system": "Sistem",
     "theme": "Tema",
-    "themeDescription": "Pilih tema terang, gelap, atau sistem untuk VidBee",
+    "themeDescription": "Pilih tema terang, gelap, atau sistem untuk VidDownloadPro",
     "title": "Pengaturan",
     "tray": {
       "quit": "Keluar",
       "showHome": "Tampilkan Beranda"
     },
-    "video": "Preferensi Video"
+    "video": "Preferensi Video",
+    "settingLoadError": "Gagal memuat pengaturan",
+    "saveError": "Gagal menyimpan pengaturan"
   },
   "subscriptions": {
     "title": "Berlangganan",
@@ -482,15 +486,15 @@
     "description": "Pantau feed RSS secara otomatis dan antre unduhan baru tanpa pekerjaan manual.",
     "defaults": {
       "title": "Default otomatisasi",
-      "description": "Kontrol di mana unduhan berlangganan disimpan dan seberapa sering VidBee memeriksa video baru.",
+      "description": "Kontrol di mana unduhan berlangganan disimpan dan seberapa sering VidDownloadPro memeriksa video baru.",
       "downloadDirectory": "Direktori unduhan",
       "filenameTemplate": "Template nama file (hanya file)",
       "onlyLatest": "Unduh hanya video terbaru",
-      "onlyLatestDescription": "Saat diaktifkan, VidBee melewati item backlog lama dan hanya mengambil unggahan terbaru."
+      "onlyLatestDescription": "Saat diaktifkan, VidDownloadPro melewati item backlog lama dan hanya mengambil unggahan terbaru."
     },
     "add": {
       "title": "Tambah RSS",
-      "description": "Tempel tautan feed RSS. VidBee akan mendeteksi feed secara otomatis."
+      "description": "Tempel tautan feed RSS. VidDownloadPro akan mendeteksi feed secara otomatis."
     },
     "fields": {
       "url": "URL Feed",
@@ -581,7 +585,7 @@
     },
     "rssHub": {
       "title": "Berlangganan Otomatis dengan RSSHub",
-      "description": "Gabungkan VidBee dengan RSSHub untuk mengaktifkan berlangganan dan unduhan otomatis dari berbagai platform. Setelah disetel, VidBee berjalan di latar belakang dan secara otomatis mengunduh video dan konten terbaru.",
+      "description": "Gabungkan VidDownloadPro dengan RSSHub untuk mengaktifkan berlangganan dan unduhan otomatis dari berbagai platform. Setelah disetel, VidDownloadPro berjalan di latar belakang dan secara otomatis mengunduh video dan konten terbaru.",
       "learnMore": "Pelajari lebih lanjut tentang RSSHub",
       "openDocs": "Buka Dokumentasi RSSHub",
       "hint": "Tidak punya URL feed RSS? Gunakan RSSHub untuk menghasilkan feed RSS untuk YouTube, Twitter, dan ribuan platform lainnya."
@@ -592,7 +596,7 @@
     "moreDescription": "Daftar lengkap yt-dlp terus diperbarui oleh komunitas.",
     "moreTitle": "Perlu situs lain?",
     "openFullList": "Buka daftar lengkap situs yang didukung",
-    "pageDescription": "VidBee menggunakan yt-dlp di balik layar untuk mencapai ratusan sumber.",
+    "pageDescription": "VidDownloadPro menggunakan yt-dlp di balik layar untuk mencapai ratusan sumber.",
     "pageIntro": "Berikut adalah layanan utama yang paling sering diunduh orang.",
     "pageTitle": "Situs yang Didukung",
     "popular": {
@@ -671,5 +675,36 @@
     },
     "popularSection": "Platform utama",
     "viewAll": "Lihat semua situs yang didukung"
+  },
+  "dashboard": {
+    "chart": {
+      "downloads": "unduhan"
+    }
+  },
+  "premium": {
+    "title": "Upgrade ke Premium",
+    "subtitle": "Buka semua fitur dan hapus batasan",
+    "features": {
+      "feature1": "Unduhan harian tanpa batas",
+      "feature2": "Semua pilihan kualitas (1080p, 4K, 8K)",
+      "feature3": "Unduhan playlist sekaligus",
+      "feature4": "Tanpa watermark pada unduhan"
+    },
+    "subscribe": "Berlangganan",
+    "restore": "Pulihkan Pembelian",
+    "terms": "Ketentuan Layanan",
+    "privacy": "Kebijakan Privasi",
+    "alreadyPremium": "Anda adalah anggota Premium",
+    "purchaseSuccess": "Selamat datang di Premium!",
+    "purchaseFailed": "Pembelian gagal. Silakan coba lagi.",
+    "restoreSuccess": "Pembelian berhasil dipulihkan",
+    "restoreFailed": "Tidak ada pembelian untuk dipulihkan",
+    "billingIssueTitle": "Masalah penagihan terdeteksi",
+    "billingIssueDescription": "Silakan perbarui metode pembayaran Anda untuk melanjutkan langganan.",
+    "playlistProOnly": "Unduhan Playlist adalah Fitur Pro",
+    "playlistProDescription": "Upgrade ke Pro untuk mengunduh seluruh playlist sekaligus.",
+    "dailyLimitReached": "Batas unduhan harian tercapai. Upgrade ke Pro untuk unduhan tanpa batas.",
+    "remainingDownloads": "{{count}} unduhan tersisa hari ini",
+    "watermarkFreeDescription": "Upgrade ke Pro untuk menghapus watermark dari unduhan."
   }
 }

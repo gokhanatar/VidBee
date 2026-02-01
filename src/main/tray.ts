@@ -100,7 +100,7 @@ export function createTray(): void {
   tray = new Tray(trayIconImage)
 
   // Set tooltip
-  tray.setToolTip('VidBee')
+  tray.setToolTip('VidDownloadPro')
 
   // Set context menu
   tray.setContextMenu(createContextMenu())

@@ -5,7 +5,7 @@ import { resolvePathWithHome } from '../utils/path-helpers'
 export const sanitizeFilenameTemplate = (template: string): string => {
   const trimmed = template.trim()
   if (!trimmed) {
-    return '%(title)s via VidBee.%(ext)s'
+    return '%(title)s via VidDownloadPro.%(ext)s'
   }
   const normalized = trimmed.replace(/\\/g, '/')
   const safeParts = normalized
@@ -14,7 +14,7 @@ export const sanitizeFilenameTemplate = (template: string): string => {
     .filter((part) => part !== '' && part !== '.' && part !== '..')
     .map((part) => part.replace(/[<>:"|?*]/g, '-').replace(/[. ]+$/g, ''))
     .filter((part) => part !== '')
-  return safeParts.length === 0 ? '%(title)s via VidBee.%(ext)s' : safeParts.join('/')
+  return safeParts.length === 0 ? '%(title)s via VidDownloadPro.%(ext)s' : safeParts.join('/')
 }
 
 export const resolveVideoFormatSelector = (options: DownloadOptions): string => {
@@ -139,7 +139,7 @@ export const buildDownloadArgs = (
   // Output path with proper encoding handling
   const baseDownloadPath = options.customDownloadPath?.trim() || downloadPath
   const filenameTemplate = sanitizeFilenameTemplate(
-    options.customFilenameTemplate ?? '%(title)s via VidBee.%(ext)s'
+    options.customFilenameTemplate ?? '%(title)s via VidDownloadPro.%(ext)s'
   )
   const safeTemplate = filenameTemplate.replace(/^[\\/]+/, '')
   const outputTemplate = path.join(baseDownloadPath, safeTemplate)

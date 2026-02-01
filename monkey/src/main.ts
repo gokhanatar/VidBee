@@ -8,22 +8,22 @@ function getVideoUrl(): string | null {
 
 // Temporarily hide button
 function hideButtonTemporarily(): void {
-  const container = document.getElementById('vidbee-download-btn')
+  const container = document.getElementById('viddownloadpro-download-btn')
   if (container) {
-    container.classList.add('vidbee-hidden')
+    container.classList.add('viddownloadpro-hidden')
     // Auto restore after 5 seconds
     setTimeout(() => {
       if (container) {
-        container.classList.remove('vidbee-hidden')
+        container.classList.remove('viddownloadpro-hidden')
       }
     }, 5000)
   }
 }
 
-// Create VidBee download button
-function createVidBeeButton(): void {
+// Create VidDownloadPro download button
+function createVidDownloadProButton(): void {
   // Check if button already exists
-  if (document.getElementById('vidbee-download-btn')) {
+  if (document.getElementById('viddownloadpro-download-btn')) {
     return
   }
 
@@ -34,32 +34,32 @@ function createVidBeeButton(): void {
 
   // Create button container
   const container = document.createElement('div')
-  container.id = 'vidbee-download-btn'
-  container.className = 'vidbee-download-container'
+  container.id = 'viddownloadpro-download-btn'
+  container.className = 'viddownloadpro-download-container'
 
   // Create main download button
   const button = document.createElement('button')
-  button.className = 'vidbee-download-button'
-  button.setAttribute('aria-label', 'Download with VidBee')
+  button.className = 'viddownloadpro-download-button'
+  button.setAttribute('aria-label', 'Download with VidDownloadPro')
   button.innerHTML = `
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
       <polyline points="7 10 12 15 17 10"></polyline>
       <line x1="12" y1="15" x2="12" y2="3"></line>
     </svg>
-    <span class="vidbee-tooltip">Download with VidBee</span>
+    <span class="viddownloadpro-tooltip">Download with VidDownloadPro</span>
   `
 
   // Create close button
   const closeButton = document.createElement('button')
-  closeButton.className = 'vidbee-close-button'
+  closeButton.className = 'viddownloadpro-close-button'
   closeButton.setAttribute('aria-label', 'Hide button')
   closeButton.innerHTML = `
     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
       <line x1="18" y1="6" x2="6" y2="18"></line>
       <line x1="6" y1="6" x2="18" y2="18"></line>
     </svg>
-    <span class="vidbee-tooltip">Hide</span>
+    <span class="viddownloadpro-tooltip">Hide</span>
   `
 
   // Handle close button click - temporarily hide
@@ -78,8 +78,8 @@ function createVidBeeButton(): void {
     if (clickCount === 1) {
       clickTimer = window.setTimeout(() => {
         // Single click - trigger download
-        const vidbeeUrl = `vidbee://download?url=${encodeURIComponent(videoUrl)}`
-        window.location.href = vidbeeUrl
+        const viddownloadproUrl = `viddownloadpro://download?url=${encodeURIComponent(videoUrl)}`
+        window.location.href = viddownloadproUrl
         clickCount = 0
       }, 300)
     } else if (clickCount === 2) {
@@ -104,9 +104,9 @@ function createVidBeeButton(): void {
 function init(): void {
   // Wait for page to fully load
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', createVidBeeButton)
+    document.addEventListener('DOMContentLoaded', createVidDownloadProButton)
   } else {
-    createVidBeeButton()
+    createVidDownloadProButton()
   }
 
   // Handle SPA navigation (when navigating between videos on sites like YouTube, Bilibili, etc.)
@@ -118,14 +118,14 @@ function init(): void {
     if (currentUrl !== lastUrl) {
       lastUrl = currentUrl
       // Remove old button and create new one
-      const oldButton = document.getElementById('vidbee-download-btn')
+      const oldButton = document.getElementById('viddownloadpro-download-btn')
       if (oldButton) {
         oldButton.remove()
       }
       // Wait a bit for the page to update (different sites have different update speeds)
       const hostname = window.location.hostname
       const delay = hostname.includes('bilibili.com') ? 800 : 500
-      setTimeout(createVidBeeButton, delay)
+      setTimeout(createVidDownloadProButton, delay)
     }
   }
 

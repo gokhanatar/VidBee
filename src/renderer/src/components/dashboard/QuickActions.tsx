@@ -1,6 +1,7 @@
 import { Button } from '@renderer/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@renderer/components/ui/card'
 import { ipcServices } from '@renderer/lib/ipc'
+import { logger } from '@renderer/lib/logger'
 import { settingsAtom } from '@renderer/store/settings'
 import { useAtomValue } from 'jotai'
 import {
@@ -37,7 +38,7 @@ export function QuickActions({
       await ipcServices.fs.openPath(settings.downloadPath)
       toast.success(t('dashboard.quickActions.folderOpened'))
     } catch (error) {
-      console.error('Failed to open download folder:', error)
+      logger.error('Failed to open download folder:', error)
       toast.error(t('dashboard.quickActions.folderOpenError'))
     }
   }
@@ -49,7 +50,7 @@ export function QuickActions({
       description: t('dashboard.quickActions.newDownloadDesc'),
       onClick: onOpenDownloadDialog,
       variant: 'default' as const,
-      colorClass: 'bg-blue-500 hover:bg-blue-600 text-white'
+      colorClass: 'bg-primary hover:bg-primary/90 text-primary-foreground'
     },
     {
       icon: <FolderOpen className="h-5 w-5" />,
@@ -85,7 +86,7 @@ export function QuickActions({
       description: t('dashboard.quickActions.clearCompletedDesc'),
       onClick: onClearCompleted,
       variant: 'outline' as const,
-      colorClass: 'text-red-600 hover:bg-red-50'
+      colorClass: 'text-destructive hover:bg-destructive/10'
     }
   ]
 

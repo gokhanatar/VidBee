@@ -3,6 +3,7 @@ import { useCallback, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { ipcEvents, ipcServices } from '../lib/ipc'
+import { logger } from '../lib/logger'
 import {
   addDownloadAtom,
   addHistoryRecordAtom,
@@ -32,7 +33,7 @@ export function useDownloadEvents() {
           removeDownload(id)
         }
       } catch (error) {
-        console.error('Failed to sync history item:', error)
+        logger.error('Failed to sync history item:', error)
       }
     },
     [addHistoryRecord, removeDownload]
@@ -46,7 +47,7 @@ export function useDownloadEvents() {
           addDownload(item)
         })
       } catch (error) {
-        console.error('Failed to load active downloads:', error)
+        logger.error('Failed to load active downloads:', error)
       }
     }
 
