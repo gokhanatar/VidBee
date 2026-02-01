@@ -671,5 +671,87 @@
     },
     "popularSection": "Main platforms",
     "viewAll": "View all supported sites"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "downloads": "Downloads",
+    "stats": {
+      "totalDownloads": "Total Downloads",
+      "totalDownloadsDesc": "All time downloads",
+      "completed": "Completed",
+      "successRate": "success rate",
+      "active": "Active",
+      "activeDesc": "Currently downloading",
+      "failed": "Failed",
+      "failedDesc": "Download errors",
+      "last24h": "Last 24 Hours",
+      "last24hDesc": "Downloads today",
+      "uniqueSites": "Sites Used",
+      "uniqueSitesDesc": "Different platforms",
+      "videoCount": "Videos",
+      "videoCountDesc": "Video downloads",
+      "audioCount": "Audio",
+      "audioCountDesc": "Audio downloads"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "description": "Shortcuts to common tasks",
+      "newDownload": "New Download",
+      "newDownloadDesc": "Add a new video or audio",
+      "openFolder": "Open Folder",
+      "openFolderDesc": "View downloaded files",
+      "subscriptions": "Manage RSS",
+      "subscriptionsDesc": "Auto-download feeds",
+      "settings": "Settings",
+      "settingsDesc": "Configure preferences",
+      "refreshAll": "Refresh All",
+      "refreshAllDesc": "Update subscriptions",
+      "clearCompleted": "Clear History",
+      "clearCompletedDesc": "Remove completed items",
+      "folderOpened": "Download folder opened",
+      "folderOpenError": "Failed to open folder",
+      "noCompletedItems": "No completed items to clear"
+    },
+    "chart": {
+      "title": "Download Activity",
+      "description": "Last 7 days download history",
+      "total": "Total",
+      "completed": "Completed",
+      "failed": "Failed"
+    },
+    "popularSites": {
+      "title": "Popular Sites",
+      "description": "Most downloaded platforms",
+      "noData": "No download history yet"
+    },
+    "filters": {
+      "title": "Filters",
+      "advanced": "Advanced Filters",
+      "searchPlaceholder": "Search by title or URL...",
+      "clear": "Clear",
+      "dateRange": "Date Range",
+      "allTime": "All Time",
+      "today": "Today",
+      "thisWeek": "This Week",
+      "thisMonth": "This Month",
+      "fileType": "File Type",
+      "allTypes": "All Types",
+      "status": "Status",
+      "site": "Website",
+      "allSites": "All Sites",
+      "apply": "Apply Filters",
+      "reset": "Reset"
+    },
+    "bulkActions": {
+      "select": "Select",
+      "selected": "{{count}} selected",
+      "selectAll": "Select All",
+      "deselectAll": "Deselect All",
+      "actions": "Actions",
+      "retry": "Retry Selected",
+      "openFolder": "Open Folder",
+      "export": "Export List",
+      "delete": "Delete Selected"
+    }
   }
 }

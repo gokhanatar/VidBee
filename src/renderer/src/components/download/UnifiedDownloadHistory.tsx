@@ -9,9 +9,10 @@ import {
   DialogHeader,
   DialogTitle
 } from '@renderer/components/ui/dialog'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@renderer/components/ui/tabs'
 import { cn } from '@renderer/lib/utils'
 import { useAtomValue, useSetAtom } from 'jotai'
-import { History as HistoryIcon } from 'lucide-react'
+import { History as HistoryIcon, LayoutDashboard } from 'lucide-react'
 import { useEffect, useId, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
@@ -33,6 +34,12 @@ import { ScrollArea } from '../ui/scroll-area'
 import { DownloadDialog } from './DownloadDialog'
 import { DownloadItem } from './DownloadItem'
 import { PlaylistDownloadGroup } from './PlaylistDownloadGroup'
+import { DashboardStats } from '../dashboard/DashboardStats'
+import { QuickActions } from '../dashboard/QuickActions'
+import { DownloadChart } from '../dashboard/DownloadChart'
+import { PopularSites } from '../dashboard/PopularSites'
+import { AdvancedFilters, type FilterOptions } from '../dashboard/AdvancedFilters'
+import { BulkActions } from '../dashboard/BulkActions'
 
 type StatusFilter = 'all' | 'active' | 'completed' | 'error'
 type ConfirmAction =
@@ -108,6 +115,14 @@ export function UnifiedDownloadHistory({
   const [confirmBusy, setConfirmBusy] = useState(false)
   const [alsoDeleteFiles, setAlsoDeleteFiles] = useState(false)
   const alsoDeleteFilesId = useId()
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'downloads'>('dashboard')
+  const [filters, setFilters] = useState<FilterOptions>({
+    searchQuery: '',
+    dateRange: 'all',
+    fileType: 'all',
+    site: 'all',
+    status: 'all'
+  })
 
   useHistorySync()
 
@@ -117,25 +132,94 @@ export function UnifiedDownloadHistory({
   )
   const selectedCount = selectedIds.size
 
-  const filteredRecords = useMemo(() => {
-    return allRecords.filter((record) => {
-      switch (statusFilter) {
-        case 'all':
-          return true
-        case 'active':
-          return (
-            record.status === 'downloading' ||
-            record.status === 'processing' ||
-            record.status === 'pending'
-          )
-        case 'completed':
-        case 'error':
-          return record.status === statusFilter
-        default:
-          return true
+  const availableSites = useMemo(() => {
+    const sites = new Set<string>()
+    allRecords.forEach((record) => {
+      try {
+        const url = new URL(record.url)
+        sites.add(url.hostname.replace('www.', ''))
+      } catch {
+        // Invalid URL, skip
       }
     })
-  }, [allRecords, statusFilter])
+    return Array.from(sites).sort()
+  }, [allRecords])
+
+  const filteredRecords = useMemo(() => {
+    return allRecords.filter((record) => {
+      // Status filter
+      const statusMatch = (() => {
+        const filterStatus = filters.status !== 'all' ? filters.status : statusFilter
+        switch (filterStatus) {
+          case 'all':
+            return true
+          case 'active':
+            return (
+              record.status === 'downloading' ||
+              record.status === 'processing' ||
+              record.status === 'pending'
+            )
+          case 'completed':
+          case 'error':
+            return record.status === filterStatus
+          default:
+            return true
+        }
+      })()
+
+      if (!statusMatch) return false
+
+      // Search query filter
+      if (filters.searchQuery) {
+        const query = filters.searchQuery.toLowerCase()
+        const titleMatch = record.title.toLowerCase().includes(query)
+        const urlMatch = record.url.toLowerCase().includes(query)
+        if (!titleMatch && !urlMatch) return false
+      }
+
+      // File type filter
+      if (filters.fileType !== 'all' && record.type !== filters.fileType) {
+        return false
+      }
+
+      // Site filter
+      if (filters.site !== 'all') {
+        try {
+          const url = new URL(record.url)
+          const hostname = url.hostname.replace('www.', '')
+          if (hostname !== filters.site) return false
+        } catch {
+          return false
+        }
+      }
+
+      // Date range filter
+      if (filters.dateRange !== 'all') {
+        const now = Date.now()
+        const recordDate = record.createdAt
+
+        switch (filters.dateRange) {
+          case 'today': {
+            const todayStart = new Date().setHours(0, 0, 0, 0)
+            if (recordDate < todayStart) return false
+            break
+          }
+          case 'week': {
+            const weekAgo = now - 7 * 24 * 60 * 60 * 1000
+            if (recordDate < weekAgo) return false
+            break
+          }
+          case 'month': {
+            const monthAgo = now - 30 * 24 * 60 * 60 * 1000
+            if (recordDate < monthAgo) return false
+            break
+          }
+        }
+      }
+
+      return true
+    })
+  }, [allRecords, statusFilter, filters])
 
   const visibleHistoryIds = useMemo(
     () =>
@@ -143,7 +227,7 @@ export function UnifiedDownloadHistory({
     [filteredRecords]
   )
 
-  const filters: Array<{ key: StatusFilter; label: string; count: number }> = [
+  const filterButtons: Array<{ key: StatusFilter; label: string; count: number }> = [
     { key: 'all', label: t('download.all'), count: downloadStats.total },
     { key: 'active', label: t('download.active'), count: downloadStats.active },
     { key: 'completed', label: t('download.completed'), count: downloadStats.completed },
@@ -438,98 +522,173 @@ export function UnifiedDownloadHistory({
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [confirmAction, selectableIds, selectedIds])
 
+  const handleClearCompleted = async () => {
+    const completedIds = allRecords
+      .filter((r) => r.status === 'completed' && r.entryType === 'history')
+      .map((r) => r.id)
+
+    if (completedIds.length === 0) {
+      toast.info(t('dashboard.quickActions.noCompletedItems'))
+      return
+    }
+
+    setConfirmAction({ type: 'delete-selected', ids: completedIds })
+  }
+
   return (
     <div className={cn('flex flex-col h-full')}>
       <CardHeader className="gap-4 p-0 px-6 py-4 z-50 bg-background backdrop-blur">
-        <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
-          <div className="flex flex-wrap items-center gap-2">
-            {filters.map((filter) => {
-              const isActive = statusFilter === filter.key
-              return (
-                <Button
-                  key={filter.key}
-                  variant={isActive ? 'secondary' : 'ghost'}
-                  size="sm"
-                  className={
-                    isActive
-                      ? 'h-8 rounded-full px-3 shadow-sm'
-                      : 'h-8 rounded-full border border-border/60 px-3'
-                  }
-                  onClick={() => setStatusFilter(filter.key)}
-                >
-                  <span>{filter.label}</span>
-                  <span
-                    className={cn(
-                      'ml-1 min-w-5 rounded-full px-1 text-xs font-medium text-neutral-900',
-                      isActive ? ' bg-neutral-100' : ' bg-neutral-200'
-                    )}
-                  >
-                    {filter.count}
-                  </span>
-                </Button>
-              )
-            })}
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="h-8 rounded-full px-3"
-              onClick={handleSelectAll}
-              disabled={selectableIds.length === 0}
-            >
-              {t('history.selectAll')}
-            </Button>
+        <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as typeof activeTab)}>
+          <div className="flex items-center justify-between mb-4">
+            <TabsList>
+              <TabsTrigger value="dashboard" className="gap-2">
+                <LayoutDashboard className="h-4 w-4" />
+                {t('dashboard.title')}
+              </TabsTrigger>
+              <TabsTrigger value="downloads" className="gap-2">
+                <HistoryIcon className="h-4 w-4" />
+                {t('dashboard.downloads')}
+              </TabsTrigger>
+            </TabsList>
+
             <DownloadDialog
               onOpenSupportedSites={onOpenSupportedSites}
               onOpenSettings={onOpenSettings}
             />
           </div>
-        </div>
-      </CardHeader>
-      <ScrollArea className="overflow-y-auto flex-1">
-        <CardContent className="space-y-3 p-0 overflow-x-hidden w-full">
-          {filteredRecords.length === 0 ? (
-            <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-border/60 px-6 py-10 text-center text-muted-foreground">
-              <HistoryIcon className="h-10 w-10 opacity-50" />
-              <p className="text-sm font-medium">{t('download.noItems')}</p>
-            </div>
-          ) : (
-            <div className="w-full pb-4">
-              {groupedView.order.map((item) => {
-                if (item.type === 'single') {
+
+          <TabsContent value="dashboard" className="mt-0">
+            <ScrollArea className="h-[calc(100vh-180px)]">
+              <div className="space-y-6 pr-4">
+                <DashboardStats />
+
+                <QuickActions
+                  onOpenDownloadDialog={() => {
+                    // Trigger download dialog
+                    const btn = document.querySelector('[data-download-dialog-trigger]') as HTMLButtonElement
+                    btn?.click()
+                  }}
+                  onOpenSettings={onOpenSettings}
+                  onOpenSubscriptions={() => {
+                    // Navigate to subscriptions
+                    window.location.hash = '#/subscriptions'
+                  }}
+                  onClearCompleted={handleClearCompleted}
+                />
+
+                <div className="grid gap-6 lg:grid-cols-2">
+                  <DownloadChart />
+                  <PopularSites />
+                </div>
+              </div>
+            </ScrollArea>
+          </TabsContent>
+
+          <TabsContent value="downloads" className="mt-0">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-sm mb-4">
+              <div className="flex flex-wrap items-center gap-2">
+                {filterButtons.map((filter) => {
+                  const isActive = statusFilter === filter.key
                   return (
-                    <DownloadItem
-                      key={`${item.record.entryType}:${item.record.id}`}
-                      download={item.record}
-                      isSelected={selectedIds.has(item.record.id)}
+                    <Button
+                      key={filter.key}
+                      variant={isActive ? 'secondary' : 'ghost'}
+                      size="sm"
+                      className={
+                        isActive
+                          ? 'h-8 rounded-full px-3 shadow-sm'
+                          : 'h-8 rounded-full border border-border/60 px-3'
+                      }
+                      onClick={() => setStatusFilter(filter.key)}
+                    >
+                      <span>{filter.label}</span>
+                      <span
+                        className={cn(
+                          'ml-1 min-w-5 rounded-full px-1 text-xs font-medium text-neutral-900',
+                          isActive ? ' bg-neutral-100' : ' bg-neutral-200'
+                        )}
+                      >
+                        {filter.count}
+                      </span>
+                    </Button>
+                  )
+                })}
+              </div>
+              <div className="flex items-center gap-2">
+                <AdvancedFilters
+                  filters={filters}
+                  onFiltersChange={setFilters}
+                  availableSites={availableSites}
+                />
+                <BulkActions
+                  selectedCount={selectedCount}
+                  totalCount={selectableIds.length}
+                  onSelectAll={handleSelectAll}
+                  onDeselectAll={handleClearSelection}
+                  onDeleteSelected={handleRequestDeleteSelected}
+                  onOpenFolder={async () => {
+                    try {
+                      await ipcServices.fs.openPath(settings.downloadPath)
+                    } catch (error) {
+                      console.error('Failed to open download folder:', error)
+                      toast.error(t('dashboard.quickActions.folderOpenError'))
+                    }
+                  }}
+                />
+              </div>
+            </div>
+          </TabsContent>
+        </Tabs>
+      </CardHeader>
+      {activeTab === 'downloads' && (
+        <ScrollArea className="overflow-y-auto flex-1">
+          <CardContent className="space-y-3 p-0 overflow-x-hidden w-full">
+            {filteredRecords.length === 0 ? (
+              <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-border/60 px-6 py-10 text-center text-muted-foreground">
+                <HistoryIcon className="h-10 w-10 opacity-50" />
+                <p className="text-sm font-medium">{t('download.noItems')}</p>
+              </div>
+            ) : (
+              <div className="w-full pb-4">
+                {groupedView.order.map((item) => {
+                  if (item.type === 'single') {
+                    return (
+                      <DownloadItem
+                        key={`${item.record.entryType}:${item.record.id}`}
+                        download={item.record}
+                        isSelected={selectedIds.has(item.record.id)}
+                        onToggleSelect={handleToggleSelect}
+                      />
+                    )
+                  }
+
+                  const group = groupedView.groups.get(item.id)
+                  if (!group) {
+                    return null
+                  }
+
+                  return (
+                    <PlaylistDownloadGroup
+                      key={`group:${group.id}`}
+                      groupId={group.id}
+                      title={group.title}
+                      totalCount={group.totalCount}
+                      records={group.records}
+                      selectedIds={selectedIds}
                       onToggleSelect={handleToggleSelect}
+                      onDeletePlaylist={handleRequestDeletePlaylist}
                     />
                   )
-                }
+                })}
+              </div>
+            )}
+          </CardContent>
+        </ScrollArea>
+      )}
 
-                const group = groupedView.groups.get(item.id)
-                if (!group) {
-                  return null
-                }
-
-                return (
-                  <PlaylistDownloadGroup
-                    key={`group:${group.id}`}
-                    groupId={group.id}
-                    title={group.title}
-                    totalCount={group.totalCount}
-                    records={group.records}
-                    selectedIds={selectedIds}
-                    onToggleSelect={handleToggleSelect}
-                    onDeletePlaylist={handleRequestDeletePlaylist}
-                  />
-                )
-              })}
-            </div>
-          )}
-        </CardContent>
-      </ScrollArea>
+      {activeTab === 'dashboard' && (
+        <div className="flex-1 overflow-hidden" />
+      )}
       {selectedCount > 0 && (
         <div className="fixed bottom-4 left-1/2 z-40 w-[calc(100%-2rem)] -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 sm:w-auto">
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-full border border-border/50 bg-background/80 pl-5 pr-2 py-2 shadow-lg backdrop-blur">

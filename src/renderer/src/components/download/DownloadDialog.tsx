@@ -794,6 +794,7 @@ export function DownloadDialog({
     <Dialog open={open} onOpenChange={setOpen}>
       <Button
         className="rounded-full"
+        data-download-dialog-trigger
         onClick={() => {
           void handleOpenDialog()
         }}
